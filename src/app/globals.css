@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b1026;
+  --bg-panel: #111827;
+  --cyan: #00e5ff;
+  --purple: #7c3aed;
+  --green: #22c55e;
+  --white: #ffffff;
+  --grid-line: rgba(0, 229, 255, 0.08);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--bg-panel);
+  --color-cyan: var(--cyan);
+  --color-purple: var(--purple);
+  --color-green: var(--green);
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.055), transparent 32rem), var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+}
+
+/* faint PCB grid across the whole page */
+.pcb-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.glow-text {
+  text-shadow: 0 0 24px rgba(0, 229, 255, 0.45);
+}
+
+.glow-border {
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.25), 0 0 24px rgba(0, 229, 255, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
