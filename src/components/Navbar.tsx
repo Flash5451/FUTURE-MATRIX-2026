@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Cpu } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -35,7 +36,7 @@ export default function Navbar() {
     >
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
         <a href="#top" className="flex items-center gap-2 font-display font-semibold tracking-tight">
-          <Cpu size={20} className="text-cyan" strokeWidth={1.75} />
+          <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={32} height={32} className="h-8 w-8 object-contain" />
           FUTURE&nbsp;MATRIX
         </a>
 

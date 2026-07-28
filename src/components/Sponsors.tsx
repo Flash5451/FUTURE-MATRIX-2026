@@ -1,9 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 
-const NAMES = ["IEEE", "IEEE SSIT & IEEE ComSoc", "IEEE Computer Society", "Vel Tech", "Your Logo Here"];
-const LOOP = [...NAMES, ...NAMES];
+const LOGOS = [
+  { src: "/logos/ieee-logo.png", alt: "IEEE" },
+  { src: "/logos/ieee-ssit-logo.png", alt: "IEEE SSIT" },
+  { src: "/logos/ieee-comsoc-logo.png", alt: "IEEE ComSoc" },
+  { src: "/logos/veltech-logo.png", alt: "Vel Tech" },
+  { src: "/logos/naac-category1-badge.png", alt: "NAAC A++ and UGC Category-1" },
+];
+const LOOP = [...LOGOS, ...LOGOS];
 
 export default function Sponsors() {
   return (
@@ -11,11 +18,16 @@ export default function Sponsors() {
       <SectionHeading eyebrow="Sponsors & Partners" title="Backed by IEEE, open to industry" align="center" />
 
       <div className="group mt-12 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-[scroll_22s_linear_infinite] gap-14 group-hover:[animation-play-state:paused]">
-          {LOOP.map((name, i) => (
-            <span key={i} className="whitespace-nowrap font-display text-lg text-white/40">
-              {name}
-            </span>
+        <div className="flex w-max animate-[scroll_22s_linear_infinite] items-center gap-14 group-hover:[animation-play-state:paused]">
+          {LOOP.map((logo, i) => (
+            <Image
+              key={i}
+              src={logo.src}
+              alt={logo.alt}
+              width={140}
+              height={56}
+              className="h-12 w-auto shrink-0 object-contain opacity-70 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+            />
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Target, Eye, ListChecks } from "lucide-react";
 import SectionHeading from "./SectionHeading";
@@ -10,7 +11,13 @@ const PILLARS = [
   { icon: ListChecks, title: "Objective", body: "Push teams past the simulation stage — every submission has to physically work on the table." },
 ];
 
-const ORGANIZERS = ["IEEE Student Branch", "IEEE SSIT & IEEE ComSoc", "Vel Tech"];
+const ORGANIZERS = [
+  { src: "/logos/ieee-logo.png", alt: "IEEE" },
+  { src: "/logos/ieee-ssit-logo.png", alt: "IEEE SSIT" },
+  { src: "/logos/ieee-comsoc-logo.png", alt: "IEEE ComSoc" },
+  { src: "/logos/veltech-logo.png", alt: "Vel Tech" },
+  { src: "/logos/naac-category1-badge.png", alt: "NAAC A++ and UGC Category-1" },
+];
 
 export default function About() {
   return (
@@ -60,7 +67,14 @@ export default function About() {
       >
         <span className="font-mono text-xs uppercase tracking-widest text-white/40">Organized by</span>
         {ORGANIZERS.map((o) => (
-          <span key={o} className="font-display text-sm text-white/70">{o}</span>
+          <Image
+            key={o.alt}
+            src={o.src}
+            alt={o.alt}
+            width={120}
+            height={48}
+            className="h-10 w-auto object-contain opacity-90"
+          />
         ))}
       </motion.div>
     </section>
