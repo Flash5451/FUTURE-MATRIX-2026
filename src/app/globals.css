@@ -54,3 +54,91 @@ body {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------- 3D / futuristic system ---------- */
+
+.perspective-wrap {
+  perspective: 1200px;
+}
+
+/* glass panel with beveled top highlight, used for card surfaces */
+.glass-panel {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 24px 48px -24px rgba(0, 0, 0, 0.65);
+}
+
+/* card that tilts in 3D toward the cursor / on hover, with a raised edge */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.45s ease;
+  will-change: transform;
+}
+
+.tilt-card:hover {
+  transform: perspective(900px) rotateX(6deg) rotateY(-6deg) translateY(-6px) translateZ(10px);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 30px 60px -20px rgba(0, 229, 255, 0.25),
+    0 0 40px -8px rgba(124, 58, 237, 0.25);
+}
+
+/* animated conic-gradient border ring, for the hero's signature 3D element */
+.holo-ring {
+  background: conic-gradient(from 0deg, var(--cyan), var(--purple), var(--green), var(--cyan));
+  animation: spin-slow 9s linear infinite;
+  filter: saturate(1.3);
+}
+
+.holo-ring::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: inherit;
+  background: var(--bg);
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+.float-anim {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+/* faint moving scanline sheen across glass panels */
+.scan-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(0, 229, 255, 0.06) 50%, transparent 60%);
+  background-size: 250% 250%;
+  animation: sheen-sweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sheen-sweep {
+  0% { background-position: 200% 0%; }
+  100% { background-position: -50% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-ring, .float-anim, .scan-sheen::before {
+    animation: none !important;
+  }
+}

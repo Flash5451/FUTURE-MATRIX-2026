@@ -16,7 +16,7 @@ export default function PrizePool() {
     <section id="prizes" className="mx-auto max-w-6xl px-6 py-24">
       <SectionHeading eyebrow="Prize Pool" title="₹32,500 Prize Pool" align="center" />
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-3">
+      <div className="perspective-wrap mt-12 grid gap-6 sm:grid-cols-3">
         {PODIUM.map((p, i) => (
           <motion.div
             key={p.place}
@@ -24,8 +24,8 @@ export default function PrizePool() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.12 }}
-            className={`glow-border rounded-2xl border p-8 text-center ${
-              i === 0 ? "border-cyan/40 bg-cyan/5 sm:-translate-y-3" : "border-white/10 bg-panel/50"
+            className={`tilt-card glow-border rounded-2xl border p-8 text-center ${
+              i === 0 ? "border-cyan/40 bg-cyan/5 sm:-translate-y-3" : "glass-panel"
             }`}
           >
             <div className="text-4xl">{p.medal}</div>

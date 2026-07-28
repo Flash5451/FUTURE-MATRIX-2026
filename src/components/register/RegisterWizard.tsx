@@ -15,6 +15,7 @@ import Step4Solution from "./steps/Step4Solution";
 import Step5Technical from "./steps/Step5Technical";
 import Step6Documents from "./steps/Step6Documents";
 import Step7Review from "./steps/Step7Review";
+import Timeline from "../Timeline";
 
 const DRAFT_KEY = "fm26-register-draft";
 
@@ -73,6 +74,7 @@ export default function RegisterWizard() {
     return () => { cancelled = true; };
   }, []);
   const [submitted, setSubmitted] = useState(false);
+  const [showTimeline, setShowTimeline] = useState(true);
   const [appId, setAppId] = useState("");
   const [draftSaved, setDraftSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -127,6 +129,31 @@ export default function RegisterWizard() {
           Software track limits (15 teams each) have been reached. Thank you for your interest.
         </p>
         <Link href="/" className="mt-8 text-sm text-white/40 hover:text-cyan">← Back to home</Link>
+      </div>
+    );
+  }
+
+  if (showTimeline) {
+    return (
+      <div className="mx-auto max-w-2xl px-6 py-16">
+        <Link href="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-white/70 hover:text-cyan">
+          <Cpu size={18} className="text-cyan" strokeWidth={1.75} /> FUTURE MATRIX
+        </Link>
+        <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Before you register</h1>
+        <p className="mt-1 text-sm text-white/50">Here&apos;s how the process runs from here through the hackathon.</p>
+
+        <div className="-mx-6">
+          <Timeline />
+        </div>
+
+        <div className="mt-2 flex justify-center">
+          <button
+            onClick={() => setShowTimeline(false)}
+            className="glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg hover:scale-[1.02] transition-transform"
+          >
+            Continue to Registration <ArrowRight size={16} />
+          </button>
+        </div>
       </div>
     );
   }

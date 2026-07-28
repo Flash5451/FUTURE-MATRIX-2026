@@ -41,7 +41,7 @@ export default function About() {
         </div>
       </motion.div>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-3">
+      <div className="perspective-wrap mt-10 grid gap-10 lg:grid-cols-3">
         {PILLARS.map((p, i) => (
           <motion.div
             key={p.title}
@@ -49,7 +49,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="rounded-xl border border-white/10 bg-panel/50 p-6"
+            className="tilt-card glass-panel rounded-xl p-6"
           >
             <p.icon className="text-cyan" size={22} strokeWidth={1.5} />
             <h3 className="mt-4 font-display text-lg font-semibold">{p.title}</h3>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowDown, FileDown } from "lucide-react";
 import Countdown from "./Countdown";
 import RegistrationCapBanner from "./RegistrationCapBanner";
@@ -20,7 +21,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-bg/20 via-bg/35 to-bg" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6 py-24">
+      <div className="relative mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-6 py-24 lg:flex-row lg:items-center lg:justify-between">
+        <div className="w-full lg:max-w-2xl">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,7 +47,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-3 max-w-xl font-display text-xl text-white/80 sm:text-2xl"
         >
-          A National-Level 24-Hour IEEE Hardware & Software Hackathon
+          A National & Intra-Level 24-Hour IEEE Hardware & Software Hackathon
         </motion.p>
 
         <div className="mt-6 flex gap-3 font-display text-2xl font-medium sm:text-3xl">
@@ -98,6 +100,34 @@ export default function Hero() {
           >
             <FileDown size={16} /> Download Rulebook
           </a>
+        </motion.div>
+        </div>
+
+        {/* signature 3D element: a rotating holographic core */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="perspective-wrap relative hidden h-64 w-64 shrink-0 items-center justify-center sm:flex lg:h-80 lg:w-80"
+          aria-hidden="true"
+        >
+          <div className="float-anim relative h-full w-full [transform-style:preserve-3d]">
+            <div className="holo-ring absolute inset-0 rounded-full opacity-70" />
+            <div
+              className="absolute inset-8 rounded-full border border-white/10"
+              style={{ animation: "spin-slow-reverse 14s linear infinite" }}
+            />
+            <div className="absolute inset-16 rounded-full border border-dashed border-cyan/25" />
+            <div className="glass-panel scan-sheen absolute inset-[26%] flex items-center justify-center overflow-hidden rounded-2xl">
+              <Image
+                src="/logos/future-matrix-logo.png"
+                alt="Future Matrix core emblem"
+                width={160}
+                height={160}
+                className="h-[62%] w-[62%] object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.35)]"
+              />
+            </div>
+          </div>
         </motion.div>
       </div>
 

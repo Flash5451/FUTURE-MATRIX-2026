@@ -5,9 +5,9 @@ import SectionHeading from "./SectionHeading";
 
 const STEPS = [
   { title: "Registration Opens", note: "Team formation begins" },
-  { title: "Registration Closes", note: "Final headcount locked" },
+  { title: "Registration Closes", note: "Final headcount locked — 22 August 2026" },
   { title: "Shortlisting", note: "Abstracts reviewed" },
-  { title: "Confirmation", note: "Shortlisted teams confirmed" },
+  { title: "Confirmation", note: "Confirmation mail sent — 27 August 2026" },
   { title: "Hackathon Day", note: "24 hours, one prototype" },
   { title: "Evaluation", note: "Judged on the working build" },
   { title: "Winners Announced", note: "Awards & closing ceremony" },

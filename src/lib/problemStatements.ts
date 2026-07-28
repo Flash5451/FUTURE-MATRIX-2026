@@ -1,9 +1,14 @@
 export const MAX_TEAMS_PER_PROBLEM = 3;
 
+export type Track = "Hardware" | "Software";
+
+// Kept for internal record-keeping (populates the Sheet's "IEEE Chapter" column) —
+// not shown to participants in the browsing/selection UI, which is organized by Track only.
 export type Chapter = "IEEE SSIT" | "IEEE ComSoc";
 
 export type ProblemStatement = {
   id: string;
+  track: Track;
   chapter: Chapter;
   sdg: string;
   title: string;
@@ -11,29 +16,129 @@ export type ProblemStatement = {
 };
 
 export const PROBLEM_STATEMENTS: ProblemStatement[] = [
-  // IEEE SSIT
-  { id: "SSIT-01", chapter: "IEEE SSIT", sdg: "SDG 3 – Good Health & Well-being", title: "Good Health and Well-being", problem: "Develop an intelligent healthcare ecosystem that leverages AI, IoT, and secure digital technologies to enable early disease detection, remote patient monitoring, personalized healthcare, and timely emergency response while ensuring privacy, accessibility, and affordability for all communities." },
-  { id: "SSIT-02", chapter: "IEEE SSIT", sdg: "SDG 4 – Quality Education", title: "Quality Education", problem: "Design an inclusive and adaptive digital learning ecosystem that uses emerging technologies to provide personalized, accessible, multilingual, and equitable education for learners regardless of their location, socioeconomic background, or physical abilities." },
-  { id: "SSIT-03", chapter: "IEEE SSIT", sdg: "SDG 5 – Gender Equality", title: "Gender Equality", problem: "Develop an integrated technology platform that empowers women through enhanced personal safety, equal access to education and employment, financial inclusion, and AI-driven tools that promote fairness, eliminate bias, and support informed decision-making." },
-  { id: "SSIT-04", chapter: "IEEE SSIT", sdg: "SDG 6 – Clean Water & Sanitation", title: "Clean Water and Sanitation", problem: "Design an intelligent water management ecosystem that continuously monitors water quality, optimizes distribution, detects contamination and leakages in real time, and promotes sustainable water usage through predictive analytics and smart monitoring technologies." },
-  { id: "SSIT-05", chapter: "IEEE SSIT", sdg: "SDG 10 – Reduced Inequalities", title: "Reduced Inequalities", problem: "Develop innovative assistive and inclusive technologies that bridge digital, social, and economic inequalities by improving accessibility, communication, education, healthcare, and public services for marginalized and differently abled communities." },
-  { id: "SSIT-06", chapter: "IEEE SSIT", sdg: "SDG 11 – Sustainable Cities & Communities", title: "Sustainable Cities and Communities", problem: "Design an integrated smart city solution that enhances urban sustainability through intelligent transportation, disaster resilience, environmental monitoring, public safety, waste management, and citizen-centric digital services while ensuring privacy, inclusivity, and resilience." },
-  { id: "SSIT-07", chapter: "IEEE SSIT", sdg: "SDG 12 – Responsible Consumption & Production", title: "Responsible Consumption and Production", problem: "Develop an intelligent circular economy platform that promotes sustainable production and responsible consumption through waste reduction, recycling automation, resource optimization, product traceability, and environmentally responsible supply chain management." },
-  { id: "SSIT-08", chapter: "IEEE SSIT", sdg: "SDG 13 – Climate Action", title: "Climate Action", problem: "Design an AI-powered climate resilience platform capable of monitoring environmental conditions, predicting climate-related disasters, supporting carbon reduction strategies, and enabling communities to adapt to the impacts of climate change through data-driven decision-making." },
-  { id: "SSIT-09", chapter: "IEEE SSIT", sdg: "SDG 16 – Peace, Justice & Strong Institutions", title: "Peace, Justice and Strong Institutions", problem: "Develop trustworthy digital solutions that strengthen transparency, cybersecurity, privacy, ethical artificial intelligence, secure public services, and citizen engagement while promoting accountability, justice, and institutional resilience." },
-  { id: "SSIT-10", chapter: "IEEE SSIT", sdg: "SDG 17 – Partnerships for the Goals", title: "Partnerships for the Goals", problem: "Create a collaborative digital innovation ecosystem that connects academia, industry, government, NGOs, startups, and communities to co-develop, implement, and measure impactful technology-driven solutions addressing the United Nations Sustainable Development Goals." },
+  // Hardware Track
+  {
+    id: "HW-01", track: "Hardware", chapter: "IEEE SSIT",
+    sdg: "SDG 6 – Clean Water and Sanitation",
+    title: "Smart Water Quality Monitoring System",
+    problem: "Design a Smart Water Quality Monitoring System using IoT sensors capable of continuously measuring water quality parameters, detecting contamination in real time, and transmitting alerts to authorities through cloud connectivity.",
+  },
+  {
+    id: "HW-02", track: "Hardware", chapter: "IEEE SSIT",
+    sdg: "SDG 11 – Sustainable Cities and Communities",
+    title: "Disaster Monitoring & Early Warning Device",
+    problem: "Develop an Intelligent Disaster Monitoring and Early Warning Device that combines environmental sensors, edge AI, and wireless communication to detect floods, landslides, fires, or hazardous conditions and provide rapid community alerts.",
+  },
+  {
+    id: "HW-03", track: "Hardware", chapter: "IEEE SSIT",
+    sdg: "SDG 3 – Good Health and Well-being",
+    title: "Portable AI Vital Health Monitor",
+    problem: "Build a Portable AI-Based Vital Health Monitoring Device capable of measuring multiple physiological parameters, detecting abnormalities locally using edge AI, and securely transmitting emergency notifications to caregivers or hospitals.",
+  },
+  {
+    id: "HW-04", track: "Hardware", chapter: "IEEE SSIT",
+    sdg: "SDG 12 – Responsible Consumption and Production",
+    title: "Autonomous Smart Waste Segregation System",
+    problem: "Design an Autonomous Smart Waste Segregation System that identifies, classifies, and sorts waste using computer vision, sensors, and embedded systems to improve recycling efficiency and reduce landfill waste.",
+  },
+  {
+    id: "HW-05", track: "Hardware", chapter: "IEEE SSIT",
+    sdg: "SDG 13 – Climate Action",
+    title: "IoT Environmental Intelligence Station",
+    problem: "Develop an IoT-enabled Environmental Intelligence Station that continuously monitors air quality, temperature, humidity, greenhouse gases, and noise pollution while providing predictive analytics for climate resilience and sustainable urban planning.",
+  },
+  {
+    id: "HW-06", track: "Hardware", chapter: "IEEE ComSoc",
+    sdg: "SDG 4 – Quality Education",
+    title: "Smart Classroom Environmental Monitoring Node",
+    problem: "Design a Smart Classroom Environmental Monitoring Node capable of measuring occupancy, temperature, humidity, and air quality while wirelessly transmitting data to a central server for intelligent classroom management.",
+  },
+  {
+    id: "HW-07", track: "Hardware", chapter: "IEEE ComSoc",
+    sdg: "SDG 6 – Clean Water & Sanitation",
+    title: "Smart Water Tank & Pipeline Monitoring Device",
+    problem: "Develop an IoT-Based Smart Water Tank and Pipeline Monitoring Device that continuously measures water levels, detects leakages, and transmits real-time alerts through LPWAN, Wi-Fi, or LoRa communication networks.",
+  },
+  {
+    id: "HW-08", track: "Hardware", chapter: "IEEE ComSoc",
+    sdg: "SDG 11 – Sustainable Cities & Communities",
+    title: "Wireless Smart Parking System",
+    problem: "Build an Intelligent Wireless Smart Parking System that detects vehicle occupancy using embedded sensors and communicates parking availability in real time to drivers through a low-power wireless network.",
+  },
+  {
+    id: "HW-09", track: "Hardware", chapter: "IEEE ComSoc",
+    sdg: "SDG 3 – Good Health & Well-being",
+    title: "Distributed Air Quality Monitoring Network",
+    problem: "Design a Distributed Air Quality Monitoring Network consisting of multiple sensor nodes capable of communicating pollution data to an edge gateway for real-time environmental monitoring and public health awareness.",
+  },
+  {
+    id: "HW-10", track: "Hardware", chapter: "IEEE ComSoc",
+    sdg: "SDG 9 – Industry, Innovation & Infrastructure",
+    title: "Portable Emergency Mesh Communication Device",
+    problem: "Develop a Portable Emergency Mesh Communication Device that establishes a self-healing wireless mesh network to provide voice and text communication when conventional cellular or internet infrastructure becomes unavailable.",
+  },
 
-  // IEEE ComSoc
-  { id: "COMSOC-01", chapter: "IEEE ComSoc", sdg: "SDG 4 – Quality Education", title: "Smart Classroom Environmental Monitoring", problem: "Develop a smart classroom environmental monitoring system that continuously measures occupancy, temperature, humidity, and air quality, and wirelessly communicates the data to a central dashboard to improve learning environments and optimize energy usage." },
-  { id: "COMSOC-02", chapter: "IEEE ComSoc", sdg: "SDG 6 – Clean Water & Sanitation", title: "Smart Water Tank Monitoring", problem: "Design an IoT-based smart water tank monitoring system capable of measuring water levels in real time and sending wireless alerts to prevent overflow, dry-run conditions, and water wastage." },
-  { id: "COMSOC-03", chapter: "IEEE ComSoc", sdg: "SDG 11 – Sustainable Cities & Communities", title: "Smart Parking Occupancy Detection", problem: "Develop a wireless smart parking occupancy detection system that identifies vacant parking spaces and communicates their availability to reduce traffic congestion and search time." },
-  { id: "COMSOC-04", chapter: "IEEE ComSoc", sdg: "SDG 6 – Clean Water & Sanitation", title: "Water Leakage Detection Network", problem: "Develop an IoT-enabled water leakage detection network capable of identifying pipeline leaks and transmitting real-time alerts to minimize water loss and improve distribution efficiency." },
-  { id: "COMSOC-05", chapter: "IEEE ComSoc", sdg: "SDG 3 – Good Health & Well-being", title: "Distributed Air Quality Monitoring", problem: "Design a distributed air quality monitoring network that collects environmental data from multiple sensor nodes and communicates pollution levels for real-time urban environmental monitoring." },
-  { id: "COMSOC-06", chapter: "IEEE ComSoc", sdg: "SDG 11 – Sustainable Cities & Communities", title: "Intelligent Streetlight Monitoring", problem: "Build an intelligent streetlight monitoring system capable of detecting lamp failures, measuring energy consumption, and wirelessly reporting maintenance requirements to municipal authorities." },
-  { id: "COMSOC-07", chapter: "IEEE ComSoc", sdg: "SDG 2 – Zero Hunger", title: "Precision Agriculture Sensor Network", problem: "Develop a precision agriculture sensor network that communicates soil moisture and environmental conditions from multiple field locations to support efficient irrigation decisions." },
-  { id: "COMSOC-08", chapter: "IEEE ComSoc", sdg: "SDG 8 – Decent Work & Economic Growth", title: "Wearable Industrial Safety Monitor", problem: "Design a wearable industrial safety monitoring device that detects hazardous environmental conditions and immediately communicates emergency alerts to supervisors through a wireless network." },
-  { id: "COMSOC-09", chapter: "IEEE ComSoc", sdg: "SDG 9 – Industry, Innovation & Infrastructure", title: "Disaster-Resilient Mesh Communication", problem: "Develop a portable disaster-resilient mesh communication network capable of enabling emergency messaging between multiple users when conventional cellular or internet infrastructure becomes unavailable." },
-  { id: "COMSOC-10", chapter: "IEEE ComSoc", sdg: "SDG 11 – Sustainable Cities & Communities", title: "Vehicle-to-Infrastructure Communication", problem: "Design a prototype Vehicle-to-Infrastructure (V2I) communication system that enables roadside units to detect hazards and wirelessly broadcast real-time safety warnings to approaching vehicles." },
+  // Software Track
+  {
+    id: "SW-01", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 3 – Good Health and Well-being",
+    title: "AI Preventive Healthcare Platform",
+    problem: "Develop an AI-powered preventive healthcare platform that predicts potential health risks using wearable sensor data, electronic health records, and lifestyle patterns, enabling personalized recommendations, remote monitoring, and emergency alerts while ensuring data privacy.",
+  },
+  {
+    id: "SW-02", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 4 – Quality Education",
+    title: "Adaptive Multilingual Learning Platform",
+    problem: "Design an adaptive multilingual learning platform that personalizes educational content using AI, supports differently-abled learners through accessibility features, and provides educators with learning analytics to improve student outcomes.",
+  },
+  {
+    id: "SW-03", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 11 – Sustainable Cities and Communities",
+    title: "Citizen-Centric Smart City Platform",
+    problem: "Develop a citizen-centric smart city platform that integrates public grievance reporting, disaster alerts, traffic intelligence, environmental monitoring, and civic service management into a unified digital ecosystem.",
+  },
+  {
+    id: "SW-04", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 10 – Reduced Inequalities",
+    title: "AI Accessibility Assistant",
+    problem: "Build an AI-enabled accessibility assistant that helps visually, hearing, or speech-impaired individuals communicate, navigate public spaces, and access essential services using computer vision, speech technologies, and multilingual interfaces.",
+  },
+  {
+    id: "SW-05", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 12 – Responsible Consumption and Production",
+    title: "AI Circular Economy Management System",
+    problem: "Create an AI-driven circular economy management system that optimizes waste segregation, predicts recyclable material value, tracks product lifecycle, and encourages sustainable consumer behavior through digital incentives.",
+  },
+  {
+    id: "SW-06", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 4 – Quality Education",
+    title: "Smart Campus Communication Platform",
+    problem: "Develop an AI-powered Smart Campus Communication Platform that integrates classroom notifications, emergency alerts, attendance synchronization, and real-time collaboration through secure wireless communication networks to enhance the digital learning experience.",
+  },
+  {
+    id: "SW-07", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 11 – Sustainable Cities & Communities",
+    title: "Smart Traffic Congestion Prediction System",
+    problem: "Design a Smart Traffic Communication and Congestion Prediction System that collects data from connected vehicles, roadside units, and IoT sensors to optimize traffic flow and reduce travel delays using intelligent communication protocols.",
+  },
+  {
+    id: "SW-08", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 9 – Industry, Innovation & Infrastructure",
+    title: "Edge AI Network Management Platform",
+    problem: "Develop an Edge AI Network Management Platform capable of monitoring IoT devices, predicting communication failures, optimizing bandwidth allocation, and ensuring reliable low-latency connectivity for smart infrastructure.",
+  },
+  {
+    id: "SW-09", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 6 – Clean Water & Sanitation",
+    title: "Cloud-Based Water Distribution Monitoring",
+    problem: "Build a Cloud-Based Smart Water Distribution Monitoring System that receives real-time data from wireless sensor networks, detects leakages, predicts maintenance requirements, and visualizes network health through interactive dashboards.",
+  },
+  {
+    id: "SW-10", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 13 – Climate Action",
+    title: "Disaster Communication Coordination Platform",
+    problem: "Create a Disaster Communication Coordination Platform that intelligently prioritizes emergency messages, allocates communication resources, maps affected regions, and enables coordination among response teams during natural disasters.",
+  },
 ];
 
 export function findProblemStatement(id: string): ProblemStatement | undefined {

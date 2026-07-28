@@ -9,7 +9,7 @@ export default function Judges() {
     <section id="judges" className="mx-auto max-w-6xl px-6 py-24">
       <SectionHeading eyebrow="Judges & Mentors" title="Announcing soon" />
 
-      <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div className="perspective-wrap mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
           <motion.div
             key={i}
@@ -17,7 +17,7 @@ export default function Judges() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.08 }}
-            className="rounded-xl border border-dashed border-white/15 bg-panel/30 p-6 text-center"
+            className="tilt-card rounded-xl border border-dashed border-white/15 bg-panel/30 p-6 text-center"
           >
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-panel/60">
               <UserRound className="text-white/30" size={24} strokeWidth={1.25} />
