@@ -63,7 +63,9 @@ export default function RegisterWizard() {
       try {
         const res = await fetch("/api/registration-status");
         const json = await res.json();
-        if (!cancelled && json.success) setRegClosed(Boolean(json.full));
+        if (!cancelled && json.success) {
+          setRegClosed(Boolean(json.tracks?.Hardware?.full && json.tracks?.Software?.full));
+        }
       } catch {
         // If the check fails, let them proceed — the server still enforces the real cap on submit.
       }
@@ -121,8 +123,8 @@ export default function RegisterWizard() {
         <Lock className="text-red-400" size={48} strokeWidth={1.5} />
         <h1 className="mt-6 font-display text-2xl font-semibold">Registration Closed</h1>
         <p className="mt-2 text-sm text-white/60">
-          Future Matrix 2026 registration is first-come, first-served, and the 100-team limit has
-          been reached. Thank you for your interest.
+          Future Matrix 2026 registration is first-come, first-served, and both the Hardware and
+          Software track limits (15 teams each) have been reached. Thank you for your interest.
         </p>
         <Link href="/" className="mt-8 text-sm text-white/40 hover:text-cyan">← Back to home</Link>
       </div>

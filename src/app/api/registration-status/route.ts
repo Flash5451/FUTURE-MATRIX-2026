@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { DISPLAYED_TEAM_CAP } from "@/lib/registration/capacity";
-import { ensureHeaderRow, listRegistrationMeta } from "@/lib/google/sheets";
+import { TRACK_CAP, TRACKS } from "@/lib/registration/capacity";
+import { countByTrack, ensureHeaderRow, listRegistrationMeta } from "@/lib/google/sheets";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,16 +10,14 @@ export async function GET() {
     await ensureHeaderRow();
     const meta = await listRegistrationMeta();
 
-    // Never reveal a count above the publicly-advertised cap, even if the
-    // real total (bounded by ACTUAL_TEAM_CAP) is higher.
-    const teamsRegistered = Math.min(meta.length, DISPLAYED_TEAM_CAP);
+    const tracks = Object.fromEntries(
+      TRACKS.map((track) => {
+        const registered = Math.min(countByTrack(meta, track), TRACK_CAP);
+        return [track, { registered, cap: TRACK_CAP, full: registered >= TRACK_CAP }];
+      })
+    );
 
-    return NextResponse.json({
-      success: true,
-      teamsRegistered,
-      teamCap: DISPLAYED_TEAM_CAP,
-      full: teamsRegistered >= DISPLAYED_TEAM_CAP,
-    });
+    return NextResponse.json({ success: true, tracks });
   } catch (err) {
     console.error("GET /api/registration-status failed:", err);
     return NextResponse.json(

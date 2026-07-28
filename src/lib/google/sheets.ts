@@ -80,6 +80,7 @@ export async function ensureHeaderRow(): Promise<void> {
 export type RegistrationRowMeta = {
   rowNumber: number;
   applicationId: string;
+  track: string;
   problemStatementId: string;
 };
 
@@ -91,9 +92,14 @@ export async function listRegistrationMeta(): Promise<RegistrationRowMeta[]> {
     .map((row, i) => ({
       rowNumber: i + 2,
       applicationId: row[0] || "",
+      track: row[3] || "",
       problemStatementId: row[6] || "",
     }))
     .filter((r) => r.applicationId);
+}
+
+export function countByTrack(rows: RegistrationRowMeta[], track: string): number {
+  return rows.filter((r) => r.track === track).length;
 }
 
 export function countForProblemStatement(rows: RegistrationRowMeta[], problemStatementId: string): number {

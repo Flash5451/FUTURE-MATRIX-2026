@@ -7,7 +7,6 @@ import SectionHeading from "./SectionHeading";
 
 const FAQS = [
   ["Who can participate?", "Any student currently enrolled in a recognized college or university, in a team of exactly 3 members (1 Team Leader + 2 Team Members)."],
-  ["Is accommodation available?", "Yes, arrangements are made for outstation participants — details shared after registration."],
   ["Will meals be provided?", "Yes — lunch, dinner, and refreshments are covered for all 24 hours."],
   ["Can we bring our own components?", "Hardware-track teams must bring all required project components and tools. Software-track teams should bring laptops and required development resources. Organizers provide network/internet connectivity."],
   ["Are certificates provided?", "All participants receive certificates; winning teams receive certificates plus cash prizes."],

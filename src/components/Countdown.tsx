@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-// TODO: set the real hackathon start date/time.
-const TARGET = new Date("2026-11-14T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-08-27T09:00:00+05:30").getTime();
 
 function getParts(msLeft: number) {
   const clamped = Math.max(msLeft, 0);
