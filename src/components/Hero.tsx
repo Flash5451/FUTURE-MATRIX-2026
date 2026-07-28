@@ -47,7 +47,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-3 max-w-xl font-display text-xl text-white/80 sm:text-2xl"
         >
-          A National & Intra-Level 24-Hour IEEE Hardware & Software Hackathon
+          An Intra-Level 24-Hour IEEE Hardware & Software Hackathon
         </motion.p>
 
         <div className="mt-6 flex gap-3 font-display text-2xl font-medium sm:text-3xl">
