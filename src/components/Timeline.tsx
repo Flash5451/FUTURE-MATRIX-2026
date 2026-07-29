@@ -18,7 +18,13 @@ export default function Timeline() {
     <section id="timeline" className="mx-auto max-w-3xl px-6 py-24">
       <SectionHeading eyebrow="Timeline" title="How the next few weeks go" />
 
-      <div className="relative mt-12 border-l border-cyan/25 pl-8">
+      <div
+        className="relative mt-12 pl-8"
+        style={{
+          borderLeft: "1px solid transparent",
+          borderImage: "linear-gradient(180deg, var(--cyan), var(--purple), var(--green)) 1",
+        }}
+      >
         {STEPS.map((s, i) => (
           <motion.div
             key={s.title}
@@ -26,10 +32,10 @@ export default function Timeline() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.4, delay: i * 0.06 }}
-            className="relative pb-10 last:pb-0"
+            className="glass-panel relative mb-4 rounded-xl px-5 py-4 last:mb-0"
           >
             <span
-              className="absolute -left-[41px] top-1 h-3 w-3 rounded-full bg-cyan"
+              className="absolute -left-[42px] top-5 h-3 w-3 rounded-full bg-cyan"
               style={{ boxShadow: "0 0 10px var(--cyan)" }}
             />
             <p className="font-display text-lg font-medium">{s.title}</p>

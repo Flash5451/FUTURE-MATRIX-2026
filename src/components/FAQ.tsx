@@ -22,7 +22,7 @@ export default function FAQ() {
     <section id="faq" className="mx-auto max-w-3xl px-6 py-24">
       <SectionHeading eyebrow="FAQ" title="Questions people actually ask" />
 
-      <div className="mt-10 divide-y divide-white/10 rounded-xl border border-white/10 bg-panel/40">
+      <div className="glass-panel mt-10 divide-y divide-white/10 rounded-xl">
         {FAQS.map(([q, a], i) => (
           <div key={q}>
             <button

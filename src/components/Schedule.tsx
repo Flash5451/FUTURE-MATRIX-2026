@@ -22,7 +22,7 @@ export default function Schedule() {
     <section id="schedule" className="mx-auto max-w-3xl px-6 py-24">
       <SectionHeading eyebrow="Schedule" title="24 hours, hour by hour" />
 
-      <div className="mt-10 divide-y divide-white/10 rounded-xl border border-white/10 bg-panel/40">
+      <div className="glass-panel mt-10 divide-y divide-white/10 rounded-xl">
         {SCHEDULE.map(([time, label], i) => (
           <motion.div
             key={label}
@@ -30,8 +30,9 @@ export default function Schedule() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.3, delay: i * 0.03 }}
-            className="flex items-center gap-6 px-5 py-3.5"
+            className="flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-white/[0.03]"
           >
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan shadow-[0_0_8px_var(--cyan)]" />
             <span className="w-20 shrink-0 font-mono text-xs text-cyan">{time}</span>
             <span className="text-sm text-white/75">{label}</span>
           </motion.div>

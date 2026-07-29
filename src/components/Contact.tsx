@@ -5,7 +5,7 @@ import SectionHeading from "./SectionHeading";
 
 const CONTACT = {
   email: "futurematrix75@gmail.com",
-  venue: "Venue to be announced — check back closer to the date",
+  venue: "Gallery Hall (Room No. 1601), Dept. of Electrical & Communication Engineering, Vel Tech University, Avadi, Chennai",
 };
 
 const CHAPTERS = [
@@ -32,20 +32,20 @@ export default function Contact() {
     <section id="contact" className="mx-auto max-w-6xl px-6 py-24">
       <SectionHeading eyebrow="Contact" title="Questions before you register?" />
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-3 rounded-xl border border-white/10 bg-panel/50 p-5 hover:border-cyan/40">
-          <Mail className="text-cyan" size={20} />
+      <div className="perspective-wrap mt-10 grid gap-4 sm:grid-cols-2">
+        <a href={`mailto:${CONTACT.email}`} className="tilt-card glass-panel flex items-center gap-3 rounded-xl p-5 hover:border-cyan/40">
+          <Mail className="text-cyan shrink-0" size={20} />
           <span className="text-sm text-white/75">{CONTACT.email}</span>
         </a>
-        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-panel/50 p-5">
+        <div className="tilt-card glass-panel flex items-center gap-3 rounded-xl p-5">
           <MapPin className="text-cyan shrink-0" size={20} />
           <span className="text-sm text-white/75">{CONTACT.venue}</span>
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="perspective-wrap mt-6 grid gap-4 sm:grid-cols-2">
         {CHAPTERS.map((chapter) => (
-          <div key={chapter.name} className="rounded-xl border border-white/10 bg-panel/50 p-5">
+          <div key={chapter.name} className="tilt-card glass-panel rounded-xl p-5">
             <p className="font-display text-sm font-semibold text-cyan">{chapter.name}</p>
 
             <div className="mt-4 flex items-start gap-3">
