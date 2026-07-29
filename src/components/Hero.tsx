@@ -47,7 +47,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-3 max-w-xl font-display text-xl text-white/80 sm:text-2xl"
         >
-          An Intra-Level 24-Hour IEEE Hardware & Software Hackathon
+          An Intra-College 24-Hour IEEE Hardware & Software Hackathon
         </motion.p>
 
         <div className="mt-6 flex gap-3 font-display text-2xl font-medium sm:text-3xl">
@@ -118,7 +118,7 @@ export default function Hero() {
               style={{ animation: "spin-slow-reverse 14s linear infinite" }}
             />
             <div className="absolute inset-16 rounded-full border border-dashed border-cyan/25" />
-            <div className="glass-panel scan-sheen absolute inset-[26%] flex items-center justify-center overflow-hidden rounded-2xl">
+            <div className="hex-frame hex-badge scan-sheen glass-panel absolute inset-[24%] flex items-center justify-center overflow-hidden">
               <Image
                 src="/logos/future-matrix-logo.png"
                 alt="Future Matrix core emblem"

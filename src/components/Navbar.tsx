@@ -30,21 +30,24 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-bg/80 backdrop-blur-md border-b border-cyan/10" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled ? "glass-panel !rounded-none !border-x-0 !border-t-0" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
         <a href="#top" className="flex items-center gap-2 font-display font-semibold tracking-tight">
-          <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={32} height={32} className="h-8 w-8 object-contain" />
+          <span className="hex-frame hex-badge flex h-8 w-8 items-center justify-center overflow-hidden bg-bg">
+            <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={32} height={32} className="h-full w-full object-cover" />
+          </span>
           FUTURE&nbsp;MATRIX
         </a>
 
         <ul className="hidden lg:flex items-center gap-6 text-sm text-white/70 font-mono">
           {LINKS.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:text-cyan transition-colors">
+              <a href={l.href} className="group relative py-1 transition-colors hover:text-cyan">
                 {l.label}
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-cyan shadow-[0_0_8px_var(--cyan)] transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}
@@ -52,7 +55,7 @@ export default function Navbar() {
 
         <Link
           href="/register"
-          className="hidden lg:inline-flex items-center rounded-full border border-cyan/40 px-5 py-2 text-sm font-medium text-cyan hover:bg-cyan hover:text-bg transition-colors"
+          className="glow-border hidden lg:inline-flex items-center rounded-full border border-cyan/40 bg-cyan/5 px-5 py-2 text-sm font-medium text-cyan transition-all hover:bg-cyan hover:text-bg hover:shadow-[0_0_24px_rgba(0,229,255,0.35)]"
         >
           Register
         </Link>
@@ -67,7 +70,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="lg:hidden bg-bg border-t border-cyan/10 px-6 py-4 flex flex-col gap-4 font-mono text-sm">
+        <div className="glass-panel lg:hidden !border-x-0 !border-t-0 px-6 py-4 flex flex-col gap-4 font-mono text-sm">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-white/80 hover:text-cyan">
               {l.label}

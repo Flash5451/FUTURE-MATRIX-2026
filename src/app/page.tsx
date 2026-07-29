@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="ambient-glow overflow-hidden">
         <Hero />
         <StatsStrip />
         <About />

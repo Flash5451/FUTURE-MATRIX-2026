@@ -31,6 +31,77 @@ body {
   font-family: var(--font-body);
 }
 
+/* ambient color blobs drifting behind content, applied via .ambient-glow wrapper */
+.ambient-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.ambient-glow::before,
+.ambient-glow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 32rem;
+  height: 32rem;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.ambient-glow::before {
+  top: -8rem;
+  left: -10rem;
+  background: var(--cyan);
+}
+
+.ambient-glow::after {
+  bottom: -10rem;
+  right: -10rem;
+  background: var(--purple);
+}
+
+::selection {
+  background: rgba(0, 229, 255, 0.35);
+  color: var(--white);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--cyan), var(--purple));
+  border-radius: 9999px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* hexagon badge shape, echoing the Future Matrix emblem outline */
+.hex-badge {
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+}
+
+.hex-frame {
+  position: relative;
+}
+
+.hex-frame::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  z-index: -1;
+  opacity: 0.9;
+}
+
 /* faint PCB grid across the whole page */
 .pcb-grid {
   background-image:
@@ -44,7 +115,11 @@ body {
 }
 
 .glow-border {
-  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.25), 0 0 24px rgba(0, 229, 255, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(0, 229, 255, 0.28),
+    0 0 24px rgba(0, 229, 255, 0.16),
+    0 0 48px -12px rgba(124, 58, 237, 0.25);
+  transition: box-shadow 0.3s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -89,9 +164,9 @@ body {
     0 0 40px -8px rgba(124, 58, 237, 0.25);
 }
 
-/* animated conic-gradient border ring, for the hero's signature 3D element */
+/* animated conic-gradient border ring, matched to the logo's cyan\u2192green emblem ring */
 .holo-ring {
-  background: conic-gradient(from 0deg, var(--cyan), var(--purple), var(--green), var(--cyan));
+  background: conic-gradient(from 0deg, var(--cyan), var(--purple) 45%, var(--green) 75%, var(--cyan));
   animation: spin-slow 9s linear infinite;
   filter: saturate(1.3);
 }

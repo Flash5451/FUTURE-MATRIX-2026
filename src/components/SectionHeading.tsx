@@ -19,8 +19,16 @@ export default function SectionHeading({
       transition={{ duration: 0.5 }}
       className={align === "center" ? "text-center" : ""}
     >
-      <p className="font-mono text-xs tracking-[0.2em] text-cyan uppercase">{eyebrow}</p>
-      <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">{title}</h2>
+      <span
+        className={`inline-flex items-center gap-2 font-mono text-xs tracking-[0.2em] text-cyan uppercase ${
+          align === "center" ? "justify-center" : ""
+        }`}
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_10px_var(--cyan)]" />
+        {eyebrow}
+      </span>
+      <h2 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">{title}</h2>
+      <div className={`gradient-rule mt-4 h-px w-16 ${align === "center" ? "mx-auto" : ""}`} />
     </motion.div>
   );
 }

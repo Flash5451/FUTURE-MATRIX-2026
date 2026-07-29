@@ -20,9 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Future Matrix 2026 | IEEE National Hardware & Software Hackathon",
+  title: "Future Matrix 2026 | IEEE Intra-College Hardware & Software Hackathon",
   description:
-    "24-hour national-level IEEE hardware & software hackathon. Build. Prototype. Innovate.",
+    "24-hour intra-college IEEE hardware & software hackathon. Build. Prototype. Innovate.",
 };
 
 export default function RootLayout({
