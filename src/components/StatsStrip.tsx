@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const STATS = [
   { value: "₹32.5K", label: "Prize Pool" },
-  { value: "30", label: "Teams" },
+  { value: "Open", label: "Team Slots" },
   { value: "24", label: "Hours" },
   { value: "10", label: "Mentors" },
   { value: "1", label: "Industry Expert" },

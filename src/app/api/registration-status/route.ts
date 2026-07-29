@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { TRACK_CAP, TRACKS } from "@/lib/registration/capacity";
+import { TRACKS } from "@/lib/registration/capacity";
 import { countByTrack, ensureHeaderRow, listRegistrationMeta } from "@/lib/google/sheets";
 
 export const runtime = "nodejs";
@@ -11,10 +11,7 @@ export async function GET() {
     const meta = await listRegistrationMeta();
 
     const tracks = Object.fromEntries(
-      TRACKS.map((track) => {
-        const registered = Math.min(countByTrack(meta, track), TRACK_CAP);
-        return [track, { registered, cap: TRACK_CAP, full: registered >= TRACK_CAP }];
-      })
+      TRACKS.map((track) => [track, { registered: countByTrack(meta, track) }])
     );
 
     return NextResponse.json({ success: true, tracks });

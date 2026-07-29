@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findProblemStatement, MAX_TEAMS_PER_PROBLEM } from "@/lib/problemStatements";
-import { TRACK_CAP } from "@/lib/registration/capacity";
 import { validateRegistrationPayload, type ValidatedRegistration } from "@/lib/registration/validate";
 import {
   appendRegistrationRow,
-  countByTrack,
   countForProblemStatement,
   deleteRow,
   ensureHeaderRow,
@@ -45,14 +43,6 @@ export async function POST(req: NextRequest) {
     await ensureHeaderRow();
 
     const meta = await listRegistrationMeta();
-
-    // Fast-fail: per-track cap (15 Hardware, 15 Software).
-    if (countByTrack(meta, data.track) >= TRACK_CAP) {
-      return fail(
-        `Registration for the ${data.track} track is FULL (${TRACK_CAP}/${TRACK_CAP} teams).`,
-        409
-      );
-    }
 
     // Fast-fail: per-problem-statement cap.
     if (countForProblemStatement(meta, data.problemStatementId) >= MAX_TEAMS_PER_PROBLEM) {
@@ -112,16 +102,6 @@ export async function POST(req: NextRequest) {
       const freshId = nextApplicationId(metaAfter.filter((r) => r.rowNumber !== rowNumber));
       await updateCell(`A${rowNumber}`, freshId);
       applicationId = freshId;
-    }
-
-    const rowsForTrack = metaAfter
-      .filter((r) => r.track === data.track)
-      .sort((a, b) => a.rowNumber - b.rowNumber);
-    const trackRank = rowsForTrack.findIndex((r) => r.rowNumber === rowNumber);
-
-    if (trackRank === -1 || trackRank >= TRACK_CAP) {
-      await deleteRow(rowNumber);
-      return fail(`The ${data.track} track just filled up. Please try the other track.`, 409);
     }
 
     const rowsForProblem = metaAfter

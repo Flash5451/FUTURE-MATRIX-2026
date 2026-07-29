@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Download, CheckCircle2, Cpu, Loader2, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, CheckCircle2, Cpu, Loader2 } from "lucide-react";
 import {
   RegisterFormData, emptyForm, stepValid, STEP_LABELS,
 } from "./formTypes";
@@ -56,23 +56,6 @@ function loadDraft(): RegisterFormData {
 export default function RegisterWizard() {
   const [data, setData] = useState<RegisterFormData>(loadDraft);
   const [step, setStep] = useState(1);
-  const [regClosed, setRegClosed] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/registration-status");
-        const json = await res.json();
-        if (!cancelled && json.success) {
-          setRegClosed(Boolean(json.tracks?.Hardware?.full && json.tracks?.Software?.full));
-        }
-      } catch {
-        // If the check fails, let them proceed — the server still enforces the real cap on submit.
-      }
-    })();
-    return () => { cancelled = true; };
-  }, []);
   const [submitted, setSubmitted] = useState(false);
   const [showTimeline, setShowTimeline] = useState(true);
   const [appId, setAppId] = useState("");
@@ -118,20 +101,6 @@ export default function RegisterWizard() {
   }
 
   const canProceed = stepValid(step, data);
-
-  if (regClosed) {
-    return (
-      <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-24 text-center">
-        <Lock className="text-red-400" size={48} strokeWidth={1.5} />
-        <h1 className="mt-6 font-display text-2xl font-semibold">Registration Closed</h1>
-        <p className="mt-2 text-sm text-white/60">
-          Future Matrix 2026 registration is first-come, first-served, and both the Hardware and
-          Software track limits (15 teams each) have been reached. Thank you for your interest.
-        </p>
-        <Link href="/" className="mt-8 text-sm text-white/40 hover:text-cyan">← Back to home</Link>
-      </div>
-    );
-  }
 
   if (showTimeline) {
     return (

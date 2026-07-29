@@ -53,7 +53,7 @@ export const DOMAINS = [
 export const YEARS = ["1st Year", "2nd Year", "3rd Year", "Final Year"];
 
 export const STEP_LABELS = [
-  "Team", "Project", "Problem", "Solution", "Technical", "Documents", "Review",
+  "Team", "Track", "Problem", "Abstract & Solution", "Technical", "Documents", "Review",
 ];
 
 export function emptyMember(): Member {
@@ -106,11 +106,11 @@ export function stepValid(step: number, d: RegisterFormData): boolean {
           m.name.trim() && m.email.trim() && m.mobile.trim() && m.department.trim() && m.year
         ));
     case 2:
-      return !!(d.projectTitle.trim() && d.track && d.domain && d.abstract.trim() && d.deliverables.trim());
+      return !!(d.projectTitle.trim() && d.track && d.domain);
     case 3:
       return !!(d.problemStatementId && d.problem.trim());
     case 4:
-      return !!d.solution.trim();
+      return !!(d.abstract.trim() && d.deliverables.trim() && d.solution.trim());
     case 5:
       return !!(d.tech.trim() && (d.track === "Software" || d.components.some((c) => c.name.trim())));
     case 6:

@@ -9,6 +9,18 @@ export default function Step4Solution({
   return (
     <div className="space-y-4">
       <CounterField
+        label="Project Abstract" required mode="words" max={500} rows={6}
+        value={data.abstract} onChange={(e) => set({ abstract: e.target.value })}
+        placeholder="Cover the problem, proposed solution, key innovation, technologies involved, and expected impact. (300–500 words)"
+      />
+
+      <CounterField
+        label="Expected Deliverables" required mode="chars" max={750} rows={4}
+        value={data.deliverables} onChange={(e) => set({ deliverables: e.target.value })}
+        placeholder="What will your team develop and demonstrate by the end of the hackathon?"
+      />
+
+      <CounterField
         label="Explain how your project addresses the problem and the value it creates" required
         mode="chars" max={1500} rows={10}
         value={data.solution} onChange={(e) => set({ solution: e.target.value })}
