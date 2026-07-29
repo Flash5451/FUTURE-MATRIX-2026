@@ -19,6 +19,11 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-bg/20 via-bg/35 to-bg" />
+        <div className="aurora-bg" />
+        <span className="data-stream" style={{ left: "12%", animationDelay: "0s" }} />
+        <span className="data-stream" style={{ left: "27%", animationDelay: "1.1s" }} />
+        <span className="data-stream" style={{ right: "18%", animationDelay: "0.6s" }} />
+        <span className="data-stream" style={{ right: "32%", animationDelay: "1.8s" }} />
       </div>
 
       <div className="relative mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-6 py-24 lg:flex-row lg:items-center lg:justify-between">
@@ -38,7 +43,10 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-4 font-display text-5xl font-semibold leading-[1.05] sm:text-7xl"
         >
-          FUTURE MATRIX <span className="text-cyan glow-text">2026</span>
+          FUTURE MATRIX{" "}
+          <span className="glitch-text text-cyan glow-text" data-text="2026">
+            2026
+          </span>
         </motion.h1>
 
         <motion.p
@@ -90,13 +98,13 @@ export default function Hero() {
         >
           <Link
             href="/register"
-            className="glow-border rounded-full bg-cyan px-7 py-3 text-sm font-semibold text-bg transition-transform hover:scale-[1.03]"
+            className="magnetic-btn glow-border rounded-full bg-cyan px-7 py-3 text-sm font-semibold text-bg"
           >
             Register Now
           </Link>
           <a
             href="/future-matrix-rulebook.pdf"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3 text-sm font-medium text-white/80 transition-colors hover:border-cyan/50 hover:text-cyan"
+            className="magnetic-btn inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3 text-sm font-medium text-white/80 transition-colors hover:border-cyan/50 hover:text-cyan"
           >
             <FileDown size={16} /> Download Rulebook
           </a>

@@ -217,3 +217,165 @@ body {
     animation: none !important;
   }
 }
+
+/* ---------- advanced futuristic layer ---------- */
+
+/* fine grain texture for a premium, non-flat surface feel */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* glitch headline: two color-split copies flicker behind the real text */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+}
+
+.glitch-text::before {
+  color: var(--cyan);
+  animation: glitch-flicker-1 6s steps(1) infinite;
+  clip-path: inset(0 0 0 0);
+}
+
+.glitch-text::after {
+  color: var(--green);
+  animation: glitch-flicker-2 6.5s steps(1) infinite;
+}
+
+@keyframes glitch-flicker-1 {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  93% { opacity: 0.7; transform: translate(-3px, 1px); clip-path: inset(10% 0 60% 0); }
+  95% { opacity: 0.5; transform: translate(3px, -1px); clip-path: inset(60% 0 5% 0); }
+  97% { opacity: 0; }
+}
+
+@keyframes glitch-flicker-2 {
+  0%, 90%, 100% { opacity: 0; transform: translate(0, 0); }
+  91% { opacity: 0.6; transform: translate(3px, -1px); clip-path: inset(40% 0 20% 0); }
+  94% { opacity: 0; }
+  96% { opacity: 0.4; transform: translate(-2px, 1px); clip-path: inset(5% 0 70% 0); }
+  98% { opacity: 0; }
+}
+
+/* angled section divider — replaces flat borders between major sections */
+.angled-divider {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+}
+
+.angled-divider svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* magnetic gradient-sweep CTA: animated sheen travels across on hover */
+.magnetic-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.magnetic-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  background-size: 250% 250%;
+  background-position: 150% 0%;
+  transition: background-position 0.7s ease;
+  pointer-events: none;
+}
+
+.magnetic-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px -8px rgba(0, 229, 255, 0.45);
+}
+
+.magnetic-btn:hover::before {
+  background-position: -50% 0%;
+}
+
+/* slow-drifting aurora blobs, richer version of ambient-glow for hero-scale sections */
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.18;
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+.aurora-bg::before {
+  top: -12rem;
+  left: -8rem;
+  background: var(--cyan);
+}
+
+.aurora-bg::after {
+  bottom: -14rem;
+  right: -6rem;
+  background: var(--purple);
+  animation-delay: -6s;
+}
+
+@keyframes aurora-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.15); }
+}
+
+/* vertical data-stream columns, decorative circuit-esque accent */
+.data-stream {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--cyan) 40%, var(--green) 60%, transparent);
+  opacity: 0.35;
+  animation: stream-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes stream-pulse {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text::before, .glitch-text::after,
+  .aurora-bg::before, .aurora-bg::after,
+  .data-stream {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

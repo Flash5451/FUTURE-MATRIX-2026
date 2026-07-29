@@ -55,7 +55,7 @@ export default function Navbar() {
 
         <Link
           href="/register"
-          className="glow-border hidden lg:inline-flex items-center rounded-full border border-cyan/40 bg-cyan/5 px-5 py-2 text-sm font-medium text-cyan transition-all hover:bg-cyan hover:text-bg hover:shadow-[0_0_24px_rgba(0,229,255,0.35)]"
+          className="magnetic-btn glow-border hidden lg:inline-flex items-center rounded-full border border-cyan/40 bg-cyan/5 px-5 py-2 text-sm font-medium text-cyan transition-colors hover:bg-cyan hover:text-bg"
         >
           Register
         </Link>
