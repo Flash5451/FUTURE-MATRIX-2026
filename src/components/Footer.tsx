@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Github, Linkedin, Twitter, Instagram, ArrowUpRight, Heart } from "lucide-react";
+import { Mail, MapPin, GitHub, Linkedin, Twitter, Instagram, ArrowUpRight, Heart } from "lucide-react";
 
 const SOCIAL_LINKS = [
-  { icon: Github, href: "#", label: "GitHub", color: "hover:text-white" },
+  { icon: GitHub, href: "#", label: "GitHub", color: "hover:text-white" },
   { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:text-[#0A66C2]" },
   { icon: Twitter, href: "#", label: "Twitter", color: "hover:text-[#1DA1F2]" },
   { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-[#E4405F]" },
