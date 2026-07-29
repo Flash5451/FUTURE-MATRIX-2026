@@ -1,82 +1,81 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { Target, Eye, ListChecks } from "lucide-react";
-import SectionHeading from "./SectionHeading";
-
-const PILLARS = [
-  { icon: Target, title: "Mission", body: "Give student innovators 24 hours to turn a real-world problem into a working hardware or software solution." },
-  { icon: Eye, title: "Vision", body: "Build a platform where hardware and software talent can create impactful solutions and gain industry visibility." },
-  { icon: ListChecks, title: "Objective", body: "Push teams past the simulation stage — every submission has to physically work on the table." },
-];
-
-const ORGANIZERS = [
-  { src: "/logos/ieee-logo.png", alt: "IEEE" },
-  { src: "/logos/ieee-ssit-logo.png", alt: "IEEE SSIT" },
-  { src: "/logos/ieee-comsoc-logo.png", alt: "IEEE ComSoc" },
-  { src: "/logos/veltech-logo.png", alt: "Vel Tech" },
-  { src: "/logos/naac-category1-badge.png", alt: "NAAC A++ and UGC Category-1" },
-];
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-6 py-24">
-      <SectionHeading eyebrow="About" title="What Future Matrix is" />
-
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-panel/60 shadow-2xl"
-      >
-        <div className="relative aspect-[3/1] min-h-[190px] w-full">
-          <img
-            src="/veltech-panorama.png"
-            alt="Vel Tech campus"
-            className="h-full w-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1026]/55 via-transparent to-transparent" />
-        </div>
-      </motion.div>
-
-      <div className="perspective-wrap mt-10 grid gap-10 lg:grid-cols-3">
-        {PILLARS.map((p, i) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="tilt-card glass-panel rounded-xl p-6"
-          >
-            <p.icon className="text-cyan" size={22} strokeWidth={1.5} />
-            <h3 className="mt-4 font-display text-lg font-semibold">{p.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-white/60">{p.body}</p>
-          </motion.div>
-        ))}
+    <section
+      id="about"
+      className="relative overflow-hidden px-6 py-24 sm:py-32 lg:py-40"
+    >
+      {/* Animated background elements */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-cyan/5 blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-purple/5 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mt-14 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-white/10 pt-8"
-      >
-        <span className="font-mono text-xs uppercase tracking-widest text-white/40">Organized by</span>
-        {ORGANIZERS.map((o) => (
-          <Image
-            key={o.alt}
-            src={o.src}
-            alt={o.alt}
-            width={120}
-            height={48}
-            className="h-10 w-auto object-contain opacity-90"
-          />
-        ))}
-      </motion.div>
+      <div className="relative mx-auto max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h2 className="font-display text-5xl sm:text-6xl font-bold mb-6">
+            About <span className="text-cyan glow-text">Future Matrix</span>
+          </h2>
+          <div className="h-1 w-24 bg-gradient-to-r from-cyan to-purple rounded-full" />
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left content */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <p className="text-lg text-white-70 leading-relaxed">
+              Future Matrix 2026 is an intra-college 24-hour hardware and software hackathon organized by the IEEE Student Branch in collaboration with IEEE SSIT and IEEE ComSoc.
+            </p>
+            <p className="text-lg text-white-70 leading-relaxed">
+              This is your chance to build innovative solutions, prototype groundbreaking ideas, and compete with your peers. Whether you're interested in embedded systems, IoT, software development, or AI, Future Matrix has challenges for everyone.
+            </p>
+            <p className="text-lg text-white-70 leading-relaxed">
+              Join hundreds of innovators and makers as we push the boundaries of what's possible in just 24 hours.
+            </p>
+          </motion.div>
+
+          {/* Right stats cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            {[
+              { number: "24", label: "Hours of Innovation" },
+              { number: "500+", label: "Expected Participants" },
+              { number: "10+", label: "Problem Statements" },
+              { number: "₹2L+", label: "Prize Pool" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.02 }}
+                className="glass-panel rounded-2xl p-6 border-l-2 border-cyan/50 hover:border-cyan transition-colors"
+              >
+                <div className="text-3xl font-bold text-cyan mb-2">{stat.number}</div>
+                <div className="text-white-70 font-mono text-sm uppercase tracking-widest">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

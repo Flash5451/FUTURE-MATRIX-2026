@@ -41,7 +41,7 @@ export default function Rules() {
           href="/future-matrix-rulebook.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/10 px-6 py-3 font-display text-sm font-semibold text-cyan transition-colors hover:bg-cyan hover:text-slate-950"
+          className="glow-border inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/10 px-6 py-3 font-display text-sm font-semibold text-cyan transition hover:bg-cyan hover:text-slate-950"
         >
           <FileDown size={18} /> Download Official Rulebook
         </a>

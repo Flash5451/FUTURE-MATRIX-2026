@@ -1,90 +1,112 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#tracks", label: "Tracks" },
-  { href: "#problems", label: "Problems" },
-  { href: "#timeline", label: "Timeline" },
-  { href: "#rules", label: "Rules" },
-  { href: "#schedule", label: "Schedule" },
-  { href: "#prizes", label: "Prizes" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+const NAV_LINKS = [
+  { label: "About", href: "#about" },
+  { label: "Why Hardware", href: "#why-hardware" },
+  { label: "Timeline", href: "#timeline" },
+  { label: "Prize Pool", href: "#prizes" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-panel !rounded-none !border-x-0 !border-t-0" : "bg-transparent"
-      }`}
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl"
     >
-      <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
-        <a href="#top" className="flex items-center gap-2 font-display font-semibold tracking-tight">
-          <span className="hex-frame hex-badge flex h-8 w-8 items-center justify-center overflow-hidden bg-bg">
-            <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={32} height={32} className="h-full w-full object-cover" />
-          </span>
-          FUTURE&nbsp;MATRIX
-        </a>
+      <div className="mx-auto max-w-7xl px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="#top" className="flex items-center gap-3 group">
+            <div className="relative h-10 w-10 transition-transform duration-300 group-hover:scale-110">
+              <Image
+                src="/logos/future-matrix-logo.png"
+                alt="Future Matrix"
+                width={40}
+                height={40}
+                className="object-contain drop-shadow-[0_0_8px_rgba(0,217,255,0.3)]"
+              />
+            </div>
+            <span className="font-display text-lg font-bold tracking-tight hidden sm:inline">
+              FUTURE<span className="text-cyan">MATRIX</span>
+            </span>
+          </Link>
 
-        <ul className="hidden lg:flex items-center gap-6 text-sm text-white/70 font-mono">
-          {LINKS.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="group relative py-1 transition-colors hover:text-cyan">
-                {l.label}
-                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-cyan shadow-[0_0_8px_var(--cyan)] transition-all duration-300 group-hover:w-full" />
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-mono text-sm tracking-wide text-white/70 transition-all duration-300 hover:text-cyan relative group"
+              >
+                {link.label}
+                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-cyan to-purple transition-all duration-300 group-hover:w-full" />
               </a>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
 
-        <Link
-          href="/register"
-          className="magnetic-btn glow-border hidden lg:inline-flex items-center rounded-full border border-cyan/40 bg-cyan/5 px-5 py-2 text-sm font-medium text-cyan transition-colors hover:bg-cyan hover:text-bg"
-        >
-          Register
-        </Link>
-
-        <button
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="lg:hidden text-white"
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </nav>
-
-      {open && (
-        <div className="glass-panel lg:hidden !border-x-0 !border-t-0 px-6 py-4 flex flex-col gap-4 font-mono text-sm">
-          {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-white/80 hover:text-cyan">
-              {l.label}
-            </a>
-          ))}
+          {/* CTA Button */}
           <Link
             href="/register"
-            onClick={() => setOpen(false)}
-            className="text-cyan border border-cyan/40 rounded-full px-4 py-2 text-center"
+            className="hidden sm:block btn-primary rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 hover:shadow-lg"
           >
             Register
           </Link>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden p-2 text-white/70 hover:text-cyan transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Navigation */}
+        <motion.div
+          initial={false}
+          animate={isOpen ? "open" : "closed"}
+          variants={{
+            open: { opacity: 1, height: "auto" },
+            closed: { opacity: 0, height: 0 },
+          }}
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden lg:hidden"
+        >
+          <div className="border-t border-white/10 py-4 space-y-3">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="block font-mono text-sm tracking-wide text-white/70 transition-colors duration-300 hover:text-cyan py-2"
+              >
+                {link.label}
+              </a>
+            ))}
+            <Link
+              href="/register"
+              className="block btn-primary rounded-full px-6 py-3 text-center text-sm font-semibold transition-all duration-300 mt-4"
+              onClick={() => setIsOpen(false)}
+            >
+              Register Now
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </motion.nav>
   );
 }

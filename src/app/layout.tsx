@@ -33,10 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-bg text-white">
-        <div className="grain-overlay" aria-hidden="true" />
-        {children}
-      </body>
+      <body className="min-h-full bg-bg text-white">{children}</body>
     </html>
   );
 }
