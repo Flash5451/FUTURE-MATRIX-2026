@@ -32,7 +32,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="font-mono text-sm tracking-widest text-cyan"
         >
-          <span className="text-amber">//</span> IEEE STUDENT BRANCH &times; IEEE SSIT &amp; IEEE ComSoc
+          <span className="text-amber">{"//"}</span> IEEE STUDENT BRANCH &times; IEEE SSIT &amp; IEEE ComSoc
         </motion.p>
 
         <motion.h1
