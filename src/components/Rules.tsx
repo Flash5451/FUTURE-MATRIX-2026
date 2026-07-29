@@ -27,7 +27,7 @@ export default function Rules() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.06 }}
-            className="tilt-card glass-panel rounded-xl p-5"
+            className="tilt-card glass-panel chip-card rounded-xl p-5"
           >
             <r.icon className="text-cyan" size={20} strokeWidth={1.5} />
             <h3 className="mt-3 font-display text-sm font-semibold">{r.title}</h3>
@@ -41,7 +41,7 @@ export default function Rules() {
           href="/future-matrix-rulebook.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="glow-border inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/10 px-6 py-3 font-display text-sm font-semibold text-cyan transition hover:bg-cyan hover:text-slate-950"
+          className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/10 px-6 py-3 font-display text-sm font-semibold text-cyan transition-colors hover:bg-cyan hover:text-slate-950"
         >
           <FileDown size={18} /> Download Official Rulebook
         </a>

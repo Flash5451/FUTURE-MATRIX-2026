@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
 const LOGOS = [
@@ -17,7 +18,13 @@ export default function Sponsors() {
     <section id="sponsors" className="mx-auto max-w-6xl px-6 py-24">
       <SectionHeading eyebrow="Sponsors & Partners" title="Backed by IEEE, open to industry" align="center" />
 
-      <div className="group mt-12 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="group mt-12 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]"
+      >
         <div className="flex w-max animate-[scroll_22s_linear_infinite] items-center gap-14 group-hover:[animation-play-state:paused]">
           {LOOP.map((logo, i) => (
             <Image
@@ -30,7 +37,7 @@ export default function Sponsors() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <style>{`
         @keyframes scroll {

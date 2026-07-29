@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TraceDivider from "@/components/TraceDivider";
 import StatsStrip from "@/components/StatsStrip";
 import About from "@/components/About";
 import WhyHardware from "@/components/WhyHardware";
@@ -20,6 +21,7 @@ export default function Home() {
       <Navbar />
       <main className="ambient-glow overflow-hidden">
         <Hero />
+        <TraceDivider />
         <StatsStrip />
         <About />
         <WhyHardware />
@@ -29,6 +31,7 @@ export default function Home() {
         <Schedule />
         <PrizePool />
         <Judges />
+        <TraceDivider />
         <Sponsors />
         <FAQ />
         <Contact />

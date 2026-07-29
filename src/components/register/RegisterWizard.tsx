@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Download, CheckCircle2, Cpu, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, CheckCircle2, Loader2 } from "lucide-react";
 import {
   RegisterFormData, emptyForm, stepValid, STEP_LABELS,
 } from "./formTypes";
@@ -56,6 +57,7 @@ function loadDraft(): RegisterFormData {
 export default function RegisterWizard() {
   const [data, setData] = useState<RegisterFormData>(loadDraft);
   const [step, setStep] = useState(1);
+  const [direction, setDirection] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [showTimeline, setShowTimeline] = useState(true);
   const [appId, setAppId] = useState("");
@@ -65,6 +67,16 @@ export default function RegisterWizard() {
 
   function set(patch: Partial<RegisterFormData>) {
     setData((d) => ({ ...d, ...patch }));
+  }
+
+  function goNext() {
+    setDirection(1);
+    setStep((s) => Math.min(7, s + 1));
+  }
+
+  function goBack() {
+    setDirection(-1);
+    setStep((s) => Math.max(1, s - 1));
   }
 
   function saveDraft() {
@@ -104,9 +116,13 @@ export default function RegisterWizard() {
 
   if (showTimeline) {
     return (
+      <div className="pcb-grid min-h-screen">
       <div className="mx-auto max-w-2xl px-6 py-16">
         <Link href="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-white/70 hover:text-cyan">
-          <Cpu size={18} className="text-cyan" strokeWidth={1.75} /> FUTURE MATRIX
+          <span className="hex-frame hex-badge flex h-7 w-7 items-center justify-center overflow-hidden bg-bg">
+            <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={28} height={28} className="h-full w-full object-cover" />
+          </span>
+          FUTURE MATRIX
         </Link>
         <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Before you register</h1>
         <p className="mt-1 text-sm text-white/50">Here&apos;s how the process runs from here through the hackathon.</p>
@@ -118,31 +134,32 @@ export default function RegisterWizard() {
         <div className="mt-2 flex justify-center">
           <button
             onClick={() => setShowTimeline(false)}
-            className="glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg hover:scale-[1.02] transition-transform"
+            className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg"
           >
             Continue to Registration <ArrowRight size={16} />
           </button>
         </div>
+      </div>
       </div>
     );
   }
 
   if (submitted) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-24 text-center">
+      <div className="pcb-grid mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-24 text-center">
         <CheckCircle2 className="text-green" size={56} strokeWidth={1.5} />
         <h1 className="mt-6 font-display text-2xl font-semibold">Registration Successful</h1>
         <p className="mt-2 text-sm text-white/60">
           Thank you for registering for Future Matrix 2026. Your project submission has been received
           for preliminary evaluation and shortlisting.
         </p>
-        <div className="glow-border mt-6 rounded-xl border border-cyan/30 bg-panel/50 px-6 py-4">
+        <div className="chip-card glass-panel mt-6 rounded-xl px-6 py-4">
           <p className="font-mono text-[11px] uppercase tracking-widest text-white/40">Application ID</p>
           <p className="mt-1 font-display text-2xl font-semibold text-cyan glow-text">{appId}</p>
         </div>
         <button
           onClick={() => downloadAcknowledgement(data, appId)}
-          className="glow-border mt-8 inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-3 text-sm font-semibold text-bg hover:scale-[1.02] transition-transform"
+          className="magnetic-btn glow-border mt-8 inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-3 text-sm font-semibold text-bg"
         >
           <Download size={16} /> Download Acknowledgement
         </button>
@@ -152,9 +169,13 @@ export default function RegisterWizard() {
   }
 
   return (
+    <div className="pcb-grid min-h-screen">
     <div className="mx-auto max-w-2xl px-6 py-16">
       <Link href="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-white/70 hover:text-cyan">
-        <Cpu size={18} className="text-cyan" strokeWidth={1.75} /> FUTURE MATRIX
+        <span className="hex-frame hex-badge flex h-7 w-7 items-center justify-center overflow-hidden bg-bg">
+          <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={28} height={28} className="h-full w-full object-cover" />
+        </span>
+        FUTURE MATRIX
       </Link>
 
       <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Team Registration</h1>
@@ -164,13 +185,19 @@ export default function RegisterWizard() {
         <StepIndicator step={step} />
       </div>
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" custom={direction} initial={false}>
         <motion.div
           key={step}
-          initial={{ opacity: 0, x: 16 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -16 }}
-          transition={{ duration: 0.25 }}
+          custom={direction}
+          variants={{
+            enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 40 : -40, scale: 0.98, filter: "blur(4px)" }),
+            center: { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" },
+            exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -40 : 40, scale: 0.98, filter: "blur(4px)" }),
+          }}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8"
         >
           {step === 1 && <Step1Team data={data} set={set} />}
@@ -193,7 +220,7 @@ export default function RegisterWizard() {
 
       <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
         <button
-          onClick={() => setStep((s) => Math.max(1, s - 1))}
+          onClick={goBack}
           disabled={step === 1}
           className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-white/70 disabled:opacity-0"
         >
@@ -202,9 +229,9 @@ export default function RegisterWizard() {
 
         {step < 7 ? (
           <button
-            onClick={() => canProceed && setStep((s) => Math.min(7, s + 1))}
+            onClick={() => canProceed && goNext()}
             disabled={!canProceed}
-            className="glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
+            className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
           >
             Next: {STEP_LABELS[step]} <ArrowRight size={16} />
           </button>
@@ -212,12 +239,13 @@ export default function RegisterWizard() {
           <button
             onClick={submit}
             disabled={!canProceed || submitting}
-            className="glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
+            className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
           >
             {submitting ? (<><Loader2 size={16} className="animate-spin" /> Submitting…</>) : (<>Submit Registration <ArrowRight size={16} /></>)}
           </button>
         )}
       </div>
+    </div>
     </div>
   );
 }

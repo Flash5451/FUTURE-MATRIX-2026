@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Mail, MapPin, GraduationCap, UserRound } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
@@ -33,19 +34,39 @@ export default function Contact() {
       <SectionHeading eyebrow="Contact" title="Questions before you register?" />
 
       <div className="perspective-wrap mt-10 grid gap-4 sm:grid-cols-2">
-        <a href={`mailto:${CONTACT.email}`} className="tilt-card glass-panel flex items-center gap-3 rounded-xl p-5 hover:border-cyan/40">
+        <motion.a
+          href={`mailto:${CONTACT.email}`}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="tilt-card glass-panel flex items-center gap-3 rounded-xl p-5 hover:border-cyan/40"
+        >
           <Mail className="text-cyan shrink-0" size={20} />
           <span className="text-sm text-white/75">{CONTACT.email}</span>
-        </a>
-        <div className="tilt-card glass-panel flex items-center gap-3 rounded-xl p-5">
+        </motion.a>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.08 }}
+          className="tilt-card glass-panel flex items-center gap-3 rounded-xl p-5"
+        >
           <MapPin className="text-cyan shrink-0" size={20} />
           <span className="text-sm text-white/75">{CONTACT.venue}</span>
-        </div>
+        </motion.div>
       </div>
 
       <div className="perspective-wrap mt-6 grid gap-4 sm:grid-cols-2">
-        {CHAPTERS.map((chapter) => (
-          <div key={chapter.name} className="tilt-card glass-panel rounded-xl p-5">
+        {CHAPTERS.map((chapter, i) => (
+          <motion.div
+            key={chapter.name}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="tilt-card glass-panel rounded-xl p-5"
+          >
             <p className="font-display text-sm font-semibold text-cyan">{chapter.name}</p>
 
             <div className="mt-4 flex items-start gap-3">
@@ -68,7 +89,7 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

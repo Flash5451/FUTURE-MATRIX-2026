@@ -22,7 +22,7 @@ export default function Timeline() {
         className="relative mt-12 pl-8"
         style={{
           borderLeft: "1px solid transparent",
-          borderImage: "linear-gradient(180deg, var(--cyan), var(--purple), var(--green)) 1",
+          borderImage: "linear-gradient(180deg, var(--cyan), var(--amber), var(--green)) 1",
         }}
       >
         {STEPS.map((s, i) => (

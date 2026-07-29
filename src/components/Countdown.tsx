@@ -29,13 +29,22 @@ export default function Countdown() {
     : [["Days", 0], ["Hrs", 0], ["Min", 0], ["Sec", 0]];
 
   return (
-    <div className="flex gap-4 font-mono" role="timer" aria-live="polite">
-      {units.map(([label, value]) => (
-        <div key={label} className="flex flex-col items-center rounded-lg border border-cyan/25 bg-panel/60 px-4 py-2 min-w-16">
-          <span className="text-2xl font-semibold text-cyan glow-text tabular-nums">
-            {String(value).padStart(2, "0")}
-          </span>
-          <span className="text-[10px] tracking-widest text-white/50 uppercase">{label}</span>
+    <div
+      className="chip-card glass-panel inline-flex items-center gap-0 rounded-lg px-5 py-3 font-mono"
+      role="timer"
+      aria-live="polite"
+    >
+      {units.map(([label, value], i) => (
+        <div key={label} className="flex items-center">
+          <div className="flex flex-col items-center px-3 min-w-14">
+            <span className="text-2xl font-semibold text-cyan glow-text tabular-nums sm:text-3xl">
+              {String(value).padStart(2, "0")}
+            </span>
+            <span className="text-[10px] tracking-widest text-white/45 uppercase">{label}</span>
+          </div>
+          {i < units.length - 1 && (
+            <span className="pb-4 font-display text-xl text-amber/60 sm:text-2xl">:</span>
+          )}
         </div>
       ))}
     </div>

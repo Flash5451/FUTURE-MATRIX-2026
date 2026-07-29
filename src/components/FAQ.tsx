@@ -24,7 +24,13 @@ export default function FAQ() {
 
       <div className="glass-panel mt-10 divide-y divide-white/10 rounded-xl">
         {FAQS.map(([q, a], i) => (
-          <div key={q}>
+          <motion.div
+            key={q}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.35, delay: i * 0.05 }}
+          >
             <button
               onClick={() => setOpen(open === i ? null : i)}
               className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
@@ -48,7 +54,7 @@ export default function FAQ() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

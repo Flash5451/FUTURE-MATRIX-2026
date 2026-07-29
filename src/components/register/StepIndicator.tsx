@@ -11,8 +11,8 @@ export default function StepIndicator({ step }: { step: number }) {
         <span className="font-mono text-xs text-cyan">Step {step} / 7</span>
         <span className="font-display text-sm font-medium">{STEP_LABELS[step - 1]}</span>
       </div>
-      <div className="mt-2 h-1 w-full rounded-full bg-white/10 sm:hidden">
-        <div className="h-1 rounded-full bg-cyan transition-all" style={{ width: `${(step / 7) * 100}%` }} />
+      <div className="mt-2 h-1 w-full rounded-full bg-white/10 sm:hidden overflow-hidden">
+        <div className="h-1 rounded-full bg-gradient-to-r from-cyan to-amber transition-all duration-500 ease-out" style={{ width: `${(step / 7) * 100}%` }} />
       </div>
 
       {/* desktop */}
@@ -24,7 +24,7 @@ export default function StepIndicator({ step }: { step: number }) {
             <div key={label} className="flex flex-1 flex-col items-center last:flex-none">
               <div className="flex w-full items-center">
                 <div
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border font-mono text-xs ${
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border font-mono text-xs transition-colors duration-300 ${
                     state === "done" ? "border-cyan bg-cyan text-bg" :
                     state === "current" ? "border-cyan text-cyan glow-border" :
                     "border-white/15 text-white/30"
@@ -33,7 +33,7 @@ export default function StepIndicator({ step }: { step: number }) {
                   {state === "done" ? <Check size={14} /> : n}
                 </div>
                 {n < 7 && (
-                  <div className={`mx-1 h-px flex-1 ${n < step ? "bg-cyan/50" : "bg-white/10"}`} />
+                  <div className={`mx-1 h-px flex-1 transition-colors duration-500 ${n < step ? "bg-cyan/50" : "bg-white/10"}`} />
                 )}
               </div>
               <span className={`mt-2 text-center font-mono text-[10px] uppercase tracking-wide ${
