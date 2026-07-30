@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen items-center overflow-hidden bg-cover bg-center bg-no-repeat pt-16"
+      className="relative flex min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat pt-28 sm:pt-36"
       style={{ backgroundImage: 'url("/veltech-campus.png")' }}
     >
       <div className="pointer-events-none absolute inset-0">
@@ -24,7 +24,7 @@ export default function Hero() {
         <CircuitTrace />
       </div>
 
-      <div className="relative mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-6 py-24 lg:flex-row lg:items-center lg:justify-between">
+      <div className="relative mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-6 pb-24 lg:flex-row lg:items-center lg:justify-between">
         <div className="w-full lg:max-w-2xl">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
