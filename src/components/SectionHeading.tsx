@@ -20,7 +20,7 @@ export default function SectionHeading({
       className={align === "center" ? "text-center" : ""}
     >
       <span className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-amber">
-        <span aria-hidden="true">{"//"}</span>
+        <span aria-hidden="true" className="inline-block h-px w-5 bg-cyan" />
         <span className="text-cyan">{eyebrow.toUpperCase()}</span>
       </span>
       <h2 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">{title}</h2>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Source_Serif_4, Inter } from "next/font/google";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
 });
@@ -12,12 +12,6 @@ const spaceGrotesk = Space_Grotesk({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${sourceSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-bg text-white">
         <div className="grain-overlay" aria-hidden="true" />

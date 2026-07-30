@@ -30,8 +30,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-panel !rounded-none !border-x-0 !border-t-0" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? "glass-panel !rounded-none !border-x-0 !border-t-0"
+          : "border-transparent bg-gradient-to-b from-bg/80 via-bg/45 to-transparent backdrop-blur-sm"
       }`}
     >
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
