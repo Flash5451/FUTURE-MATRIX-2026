@@ -9,7 +9,6 @@ import {
   RegisterFormData, emptyForm, stepValid, STEP_LABELS,
 } from "./formTypes";
 import StepIndicator from "./StepIndicator";
-import StepIndicatorVertical from "./StepIndicatorVertical";
 import Step1Team from "./steps/Step1Team";
 import Step2Project from "./steps/Step2Project";
 import Step3Problem from "./steps/Step3Problem";
@@ -53,17 +52,6 @@ function loadDraft(): RegisterFormData {
   } catch {
     return emptyForm();
   }
-}
-
-function BrandMark() {
-  return (
-    <Link href="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-white/70 hover:text-cyan">
-      <span className="hex-frame hex-badge flex h-7 w-7 items-center justify-center overflow-hidden bg-bg">
-        <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={28} height={28} className="h-full w-full object-cover" />
-      </span>
-      FUTURE MATRIX
-    </Link>
-  );
 }
 
 export default function RegisterWizard() {
@@ -128,25 +116,30 @@ export default function RegisterWizard() {
 
   if (showTimeline) {
     return (
-      <div className="grid-bg pcb-grid min-h-screen">
-        <div className="mx-auto max-w-2xl px-6 py-16">
-          <BrandMark />
-          <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Before you register</h1>
-          <p className="mt-1 text-sm text-white/50">Here&apos;s how the process runs from here through the hackathon.</p>
+      <div className="pcb-grid min-h-screen">
+      <div className="mx-auto max-w-2xl px-6 py-16">
+        <Link href="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-white/70 hover:text-cyan">
+          <span className="hex-frame hex-badge flex h-7 w-7 items-center justify-center overflow-hidden bg-bg">
+            <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={28} height={28} className="h-full w-full object-cover" />
+          </span>
+          FUTURE MATRIX
+        </Link>
+        <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Before you register</h1>
+        <p className="mt-1 text-sm text-white/50">Here&apos;s how the process runs from here through the hackathon.</p>
 
-          <div className="-mx-6">
-            <Timeline />
-          </div>
-
-          <div className="mt-2 flex justify-center">
-            <button
-              onClick={() => setShowTimeline(false)}
-              className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg"
-            >
-              Continue to Registration <ArrowRight size={16} />
-            </button>
-          </div>
+        <div className="-mx-6">
+          <Timeline />
         </div>
+
+        <div className="mt-2 flex justify-center">
+          <button
+            onClick={() => setShowTimeline(false)}
+            className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg"
+          >
+            Continue to Registration <ArrowRight size={16} />
+          </button>
+        </div>
+      </div>
       </div>
     );
   }
@@ -176,93 +169,83 @@ export default function RegisterWizard() {
   }
 
   return (
-    <div className="grid-bg pcb-grid min-h-screen">
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-10 lg:py-16">
-        {/* mission panel — sticky on desktop */}
-        <aside className="lg:sticky lg:top-16 lg:self-start">
-          <BrandMark />
-          <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Team Registration</h1>
-          <p className="mt-1 text-sm text-white/50">7 steps. Save a draft anytime, come back later.</p>
+    <div className="pcb-grid min-h-screen">
+    <div className="mx-auto max-w-2xl px-6 py-16">
+      <Link href="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-white/70 hover:text-cyan">
+        <span className="hex-frame hex-badge flex h-7 w-7 items-center justify-center overflow-hidden bg-bg">
+          <Image src="/logos/future-matrix-logo.png" alt="Future Matrix Hackathon logo" width={28} height={28} className="h-full w-full object-cover" />
+        </span>
+        FUTURE MATRIX
+      </Link>
 
-          <div className="mt-8 hidden lg:block">
-            <StepIndicatorVertical step={step} />
-          </div>
+      <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Team Registration</h1>
+      <p className="mt-1 text-sm text-white/50">7 steps. Save a draft anytime, come back later.</p>
 
-          <div className="mt-8 lg:hidden">
-            <StepIndicator step={step} />
-          </div>
-
-          <div className="chip-card glass-panel mt-8 hidden rounded-xl p-4 lg:block">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-cyan">Tip</p>
-            <p className="mt-1 text-xs leading-relaxed text-white/55">
-              You can save a draft from the review step and pick up where you left off on this device.
-            </p>
-          </div>
-        </aside>
-
-        {/* form panel */}
-        <div className="chip-card glass-panel rounded-2xl p-6 sm:p-8">
-          <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <motion.div
-              key={step}
-              custom={direction}
-              variants={{
-                enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 40 : -40, scale: 0.98, filter: "blur(4px)" }),
-                center: { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" },
-                exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -40 : 40, scale: 0.98, filter: "blur(4px)" }),
-              }}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {step === 1 && <Step1Team data={data} set={set} />}
-              {step === 2 && <Step2Project data={data} set={set} />}
-              {step === 3 && <Step3Problem data={data} set={set} />}
-              {step === 4 && <Step4Solution data={data} set={set} />}
-              {step === 5 && <Step5Technical data={data} set={set} />}
-              {step === 6 && <Step6Documents data={data} set={set} />}
-              {step === 7 && (
-                <Step7Review data={data} set={set} goToStep={setStep} onSaveDraft={saveDraft} draftSaved={draftSaved} />
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          {submitError && step === 7 && (
-            <div className="mt-6 rounded-lg border border-red-400/30 bg-red-400/5 px-4 py-3 text-sm text-red-300">
-              {submitError}
-            </div>
-          )}
-
-          <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
-            <button
-              onClick={goBack}
-              disabled={step === 1}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-white/70 disabled:opacity-0"
-            >
-              <ArrowLeft size={16} /> Back
-            </button>
-
-            {step < 7 ? (
-              <button
-                onClick={() => canProceed && goNext()}
-                disabled={!canProceed}
-                className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Next: {STEP_LABELS[step]} <ArrowRight size={16} />
-              </button>
-            ) : (
-              <button
-                onClick={submit}
-                disabled={!canProceed || submitting}
-                className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {submitting ? (<><Loader2 size={16} className="animate-spin" /> Submitting…</>) : (<>Submit Registration <ArrowRight size={16} /></>)}
-              </button>
-            )}
-          </div>
-        </div>
+      <div className="mt-8">
+        <StepIndicator step={step} />
       </div>
+
+      <AnimatePresence mode="wait" custom={direction} initial={false}>
+        <motion.div
+          key={step}
+          custom={direction}
+          variants={{
+            enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 40 : -40, scale: 0.98, filter: "blur(4px)" }),
+            center: { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" },
+            exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -40 : 40, scale: 0.98, filter: "blur(4px)" }),
+          }}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8"
+        >
+          {step === 1 && <Step1Team data={data} set={set} />}
+          {step === 2 && <Step2Project data={data} set={set} />}
+          {step === 3 && <Step3Problem data={data} set={set} />}
+          {step === 4 && <Step4Solution data={data} set={set} />}
+          {step === 5 && <Step5Technical data={data} set={set} />}
+          {step === 6 && <Step6Documents data={data} set={set} />}
+          {step === 7 && (
+            <Step7Review data={data} set={set} goToStep={setStep} onSaveDraft={saveDraft} draftSaved={draftSaved} />
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {submitError && step === 7 && (
+        <div className="mt-6 rounded-lg border border-red-400/30 bg-red-400/5 px-4 py-3 text-sm text-red-300">
+          {submitError}
+        </div>
+      )}
+
+      <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
+        <button
+          onClick={goBack}
+          disabled={step === 1}
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm text-white/70 disabled:opacity-0"
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
+
+        {step < 7 ? (
+          <button
+            onClick={() => canProceed && goNext()}
+            disabled={!canProceed}
+            className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Next: {STEP_LABELS[step]} <ArrowRight size={16} />
+          </button>
+        ) : (
+          <button
+            onClick={submit}
+            disabled={!canProceed || submitting}
+            className="magnetic-btn glow-border inline-flex items-center gap-2 rounded-full bg-cyan px-6 py-2.5 text-sm font-semibold text-bg disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {submitting ? (<><Loader2 size={16} className="animate-spin" /> Submitting…</>) : (<>Submit Registration <ArrowRight size={16} /></>)}
+          </button>
+        )}
+      </div>
+    </div>
     </div>
   );
 }

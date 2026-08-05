@@ -14,13 +14,12 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[92vh] overflow-hidden bg-cover bg-center bg-no-repeat pt-10 sm:pt-16"
+      className="relative flex min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat pt-28 sm:pt-36"
       style={{ backgroundImage: 'url("/veltech-campus.png")' }}
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg/25 via-bg/40 to-bg" />
-        <div className="pcb-grid absolute inset-0 opacity-60" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/20 via-bg/35 to-bg" />
         <div className="aurora-bg" />
         <CircuitTrace />
       </div>
@@ -42,7 +41,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-4 font-display text-5xl font-semibold leading-[1.05] sm:text-7xl"
         >
-          FUTURE MATRIX <span className="holo-text glow-text">2026</span>
+          FUTURE MATRIX <span className="text-cyan glow-text">2026</span>
         </motion.h1>
 
         <motion.p

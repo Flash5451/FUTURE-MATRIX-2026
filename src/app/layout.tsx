@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { Orbitron, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Source_Serif_4, Inter } from "next/font/google";
 import ScrollProgress from "@/components/ScrollProgress";
+import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -33,13 +27,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${sourceSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-bg text-white">
-        <div className="grid-bg" aria-hidden="true" />
-        <div className="scanline-overlay" aria-hidden="true" />
         <div className="grain-overlay" aria-hidden="true" />
         <ScrollProgress />
+        <BackToTop />
         {children}
       </body>
     </html>
