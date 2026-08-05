@@ -1,14 +1,25 @@
 @import "tailwindcss";
 
+/* =========================================================
+   FUTURE MATRIX — "2100" DESIGN SYSTEM
+   Holographic HUD aesthetic: deep space background, neon
+   cyan / magenta-violet / spring-green signal colors,
+   glassmorphism, animated grid + scanlines, glow everywhere.
+   ========================================================= */
+
 :root {
-  --bg: #0a1628;
-  --bg-panel: #101f35;
-  --cyan: #c6a15b;
-  --amber: #c6a15b;
-  --green: #4a7856;
-  --maroon: #8b2635;
-  --white: #ede7d9;
-  --grid-line: rgba(198, 161, 91, 0.06);
+  --bg: #05060d;
+  --bg-panel: #0a0e1e;
+  --cyan: #22e8ff;
+  --amber: #ff2ea6;   /* repurposed as the neon magenta/violet accent */
+  --green: #23ffa8;
+  --maroon: #7c3aed;  /* deep violet, used for the second ambient glow */
+  --white: #eaf6ff;
+  --grid-line: rgba(34, 232, 255, 0.07);
+
+  --glow-cyan: rgba(34, 232, 255, 0.55);
+  --glow-amber: rgba(255, 46, 166, 0.5);
+  --glow-green: rgba(35, 255, 168, 0.45);
 }
 
 @theme inline {
@@ -17,9 +28,9 @@
   --color-cyan: var(--cyan);
   --color-amber: var(--amber);
   --color-green: var(--green);
-  --font-display: var(--font-source-serif);
-  --font-body: var(--font-inter);
-  --font-mono: var(--font-inter);
+  --font-display: var(--font-orbitron);
+  --font-body: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 * {
@@ -30,9 +41,11 @@ body {
   background: var(--bg);
   color: var(--white);
   font-family: var(--font-body);
+  position: relative;
 }
 
-/* ambient color blobs — kept extremely subtle, no longer a bright glow */
+/* ---------- ambient blobs ---------- */
+
 .ambient-glow {
   position: relative;
   isolation: isolate;
@@ -43,11 +56,11 @@ body {
   content: "";
   position: absolute;
   z-index: -1;
-  width: 32rem;
-  height: 32rem;
+  width: 36rem;
+  height: 36rem;
   border-radius: 9999px;
-  filter: blur(110px);
-  opacity: 0.05;
+  filter: blur(120px);
+  opacity: 0.16;
   pointer-events: none;
 }
 
@@ -64,7 +77,7 @@ body {
 }
 
 ::selection {
-  background: rgba(198, 161, 91, 0.35);
+  background: rgba(34, 232, 255, 0.35);
   color: var(--white);
 }
 
@@ -75,16 +88,17 @@ body {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--cyan);
+  background: linear-gradient(var(--cyan), var(--amber));
   border-radius: 9999px;
 }
 
 :focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 3px;
+  box-shadow: 0 0 14px var(--glow-cyan);
 }
 
-/* circular medallion badge, echoing an official seal rather than a hex/tech shape */
+/* circular medallion badge with a spinning holographic ring behind it */
 .hex-badge {
   border-radius: 9999px;
 }
@@ -96,25 +110,47 @@ body {
 .hex-frame::before {
   content: "";
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 9999px;
-  background: var(--cyan);
+  background: conic-gradient(from 0deg, var(--cyan), var(--amber), var(--green), var(--cyan));
   z-index: -1;
-  opacity: 0.85;
+  opacity: 0.9;
+  animation: spin-slow 6s linear infinite;
 }
 
-/* retained only as a near-invisible texture — no longer a visible PCB trace grid */
+/* faint blueprint / circuit-board grid texture, used behind hero art */
 .pcb-grid {
-  background-image: none;
+  background-image:
+    linear-gradient(rgba(34, 232, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 232, 255, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
 }
 
 .glow-text {
-  text-shadow: none;
+  text-shadow: 0 0 8px var(--glow-cyan), 0 0 26px var(--glow-cyan), 0 0 52px rgba(34, 232, 255, 0.22);
 }
 
 .glow-border {
-  box-shadow: 0 0 0 1px rgba(198, 161, 91, 0.35);
+  box-shadow: 0 0 0 1px rgba(34, 232, 255, 0.4), 0 0 22px -4px var(--glow-cyan), 0 0 44px -14px var(--glow-cyan);
   transition: box-shadow 0.3s ease;
+}
+
+.glow-border:hover {
+  box-shadow: 0 0 0 1px rgba(34, 232, 255, 0.65), 0 0 30px -2px var(--glow-cyan), 0 0 60px -8px var(--glow-cyan);
+}
+
+/* holographic animated gradient text */
+.holo-text {
+  background: linear-gradient(90deg, var(--cyan), var(--amber), var(--green), var(--cyan));
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: holo-shift 6s linear infinite;
+}
+
+@keyframes holo-shift {
+  to { background-position: 300% center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -128,32 +164,52 @@ body {
 /* ---------- surfaces ---------- */
 
 .perspective-wrap {
-  perspective: none;
+  perspective: 1400px;
 }
 
-/* flat, formal card surface — no blur, no translucency */
+/* real glassmorphism: blur, translucency, thin gradient border */
 .glass-panel {
   position: relative;
-  background: var(--bg-panel);
-  border: 1px solid rgba(237, 231, 217, 0.1);
-  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    rgba(10, 14, 30, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 8px 32px -16px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* restrained hover: a quiet lift and border tone shift, no 3D tilt */
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(34, 232, 255, 0.4), rgba(255, 46, 166, 0.14) 45%, transparent 75%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* 3D hover lift with a subtle tilt, glowing edge on contact */
 .tilt-card {
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tilt-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(198, 161, 91, 0.45);
-  box-shadow: 0 12px 24px -14px rgba(0, 0, 0, 0.55);
+  transform: translateY(-6px) scale(1.015) rotateX(3deg);
+  border-color: rgba(34, 232, 255, 0.5);
+  box-shadow: 0 22px 44px -20px rgba(0, 0, 0, 0.65), 0 0 32px -8px var(--glow-cyan);
 }
 
-/* static medallion ring (no spin) */
+/* spinning holographic ring at the core of the hero medallion */
 .holo-ring {
-  background: var(--cyan);
-  animation: none;
+  background: conic-gradient(from 0deg, var(--cyan), var(--amber), var(--green), var(--cyan));
+  animation: spin-slow 10s linear infinite;
+  filter: drop-shadow(0 0 22px var(--glow-cyan));
 }
 
 .holo-ring::after {
@@ -168,17 +224,41 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes spin-slow-reverse {
+  to { transform: rotate(-360deg); }
+}
+
 @keyframes float-y {
   0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
 }
 
 .float-anim {
-  animation: none;
+  animation: float-y 6s ease-in-out infinite;
 }
 
-/* moving sheen removed for a quieter, formal surface */
+/* diagonal light sweep across a panel, looping */
+.scan-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
 .scan-sheen::before {
-  content: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(34, 232, 255, 0.14), transparent);
+  animation: scan-sweep 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scan-sweep {
+  0% { left: -150%; }
+  55% { left: 150%; }
+  100% { left: 150%; }
 }
 
 /* ---------- texture & buttons ---------- */
@@ -188,46 +268,150 @@ body {
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  opacity: 0.02;
+  opacity: 0.025;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* clean, restrained CTA — simple lift, no gradient sheen sweep */
+/* full-viewport HUD grid, fixed behind all content, gently panning */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, black 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, black 35%, transparent 100%);
+  animation: grid-pan 44s linear infinite;
+}
+
+@keyframes grid-pan {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 56px 56px, 56px 56px; }
+}
+
+/* faint CRT scanlines + a slow scanning highlight sweeping down the page */
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+  pointer-events: none;
+  opacity: 0.4;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+}
+
+.scanline-overlay::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, rgba(34, 232, 255, 0.05), transparent);
+  animation: scan-drift 10s linear infinite;
+}
+
+@keyframes scan-drift {
+  0% { top: -160px; }
+  100% { top: 100%; }
+}
+
+/* clean CTA lift, plus a gradient sheen sweeping through on hover */
 .magnetic-btn {
   position: relative;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .magnetic-btn::before {
-  content: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.magnetic-btn:hover::before {
+  left: 125%;
 }
 
 .magnetic-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6), 0 0 26px -6px var(--glow-cyan);
 }
 
-/* hero backdrop glow removed — a plain, calm background */
+/* drifting aurora blobs behind the hero */
 .aurora-bg {
-  display: none;
+  display: block;
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(40% 35% at 20% 25%, rgba(34, 232, 255, 0.22), transparent 70%),
+    radial-gradient(35% 30% at 80% 20%, rgba(255, 46, 166, 0.18), transparent 70%),
+    radial-gradient(45% 40% at 50% 90%, rgba(35, 255, 168, 0.12), transparent 70%);
+  filter: blur(60px);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 @keyframes aurora-drift {
-  0%, 100% { transform: none; }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(2%, -3%, 0) scale(1.08); }
 }
 
-/* plain card, no notch/pin-tick PCB styling */
+/* card with glowing corner brackets, like a targeting reticle */
 .chip-card {
   position: relative;
 }
 
+.chip-card::before,
+.chip-card::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--cyan);
+  opacity: 0.5;
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+  pointer-events: none;
+}
+
 .chip-card::before {
-  content: none;
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.chip-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.chip-card:hover::before,
+.chip-card:hover::after {
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 0 6px var(--glow-cyan));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .holo-ring, .float-anim, .scan-sheen::before {
+  .holo-ring, .float-anim, .scan-sheen::before, .grid-bg, .scanline-overlay::after, .aurora-bg, .hex-frame::before {
     animation: none !important;
   }
 }
