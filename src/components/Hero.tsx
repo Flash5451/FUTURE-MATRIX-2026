@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat pt-28 sm:pt-36"
+      className="relative flex min-h-[92vh] overflow-hidden bg-cover bg-center bg-no-repeat pt-10 sm:pt-16"
       style={{ backgroundImage: 'url("/veltech-campus.png")' }}
     >
       <div className="pointer-events-none absolute inset-0">

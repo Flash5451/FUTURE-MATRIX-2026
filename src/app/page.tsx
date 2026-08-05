@@ -19,24 +19,26 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="ambient-glow overflow-hidden">
-        <Hero />
-        <TraceDivider />
-        <StatsStrip />
-        <About />
-        <WhyHardware />
-        <ProblemStatements />
-        <Timeline />
-        <Rules />
-        <Schedule />
-        <PrizePool />
-        <Judges />
-        <TraceDivider />
-        <Sponsors />
-        <FAQ />
-        <Contact />
-      </main>
-      <Footer />
+      <div className="lg:pl-20">
+        <main className="ambient-glow overflow-hidden pt-14 lg:pt-12">
+          <Hero />
+          <TraceDivider />
+          <StatsStrip />
+          <About />
+          <WhyHardware />
+          <ProblemStatements />
+          <Timeline />
+          <Rules />
+          <Schedule />
+          <PrizePool />
+          <Judges />
+          <TraceDivider />
+          <Sponsors />
+          <FAQ />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }
