@@ -7,11 +7,11 @@ import SectionHeading from "./SectionHeading";
 
 const FAQS = [
   ["Who can participate?", "Any student currently enrolled in a recognized college or university, in a team of exactly 3 members (1 Team Leader + 2 Team Members)."],
-  ["Will meals be provided?", "Yes — lunch, dinner, and refreshments are covered for all 24 hours."],
+  ["Will meals be provided?", "Yes, meals are taken care of — lunch, dinner, and refreshments are provided throughout the full 24 hours."],
   ["Can we bring our own components?", "Hardware-track teams must bring all required project components and tools. Software-track teams should bring laptops and required development resources. Organizers provide network/internet connectivity."],
   ["Are certificates provided?", "All participants receive certificates; winning teams receive certificates plus cash prizes."],
   ["Is IEEE membership mandatory?", "No, IEEE membership is not mandatory to participate."],
-  ["Is there a fee to participate?", "Registration itself is free. If your team is shortlisted, each member pays ₹200 (₹600 total per team of 3) to confirm your slot."],
+  ["Is there a fee to participate?", "Registration itself is free. If your team is shortlisted, each member pays ₹236 (₹708 total per team of 3), inclusive of 18% GST, to confirm your slot."],
   ["What should we bring?", "All teams should bring laptops, chargers, and a valid college ID. Hardware-track teams must also bring all required components and project-specific tools."],
 ];
 

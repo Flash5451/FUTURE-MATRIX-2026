@@ -73,7 +73,7 @@ export default function Step7Review({
 
       <div className="rounded-lg border border-amber-400/25 bg-amber-400/5 p-4 text-xs leading-6 text-amber-200/90">
         <span className="font-semibold text-amber-300">Note:</span> Registration is free. If your
-        team is shortlisted, each member pays ₹200 (₹600 total per team of 3) to confirm your slot.
+        team is shortlisted, each member pays ₹236 (₹708 total per team of 3), inclusive of 18% GST, to confirm your slot.
       </div>
 
       <label className="flex items-start gap-3 rounded-lg border border-white/10 bg-panel/40 p-4 text-sm text-white/70">

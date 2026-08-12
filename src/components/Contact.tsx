@@ -6,7 +6,7 @@ import SectionHeading from "./SectionHeading";
 
 const CONTACT = {
   email: "futurematrix75@gmail.com",
-  venue: "Gallery Hall (Room No. 1601), Dept. of Electrical & Communication Engineering, Vel Tech University, Avadi, Chennai",
+  venue: "Gallery Hall (Room No. 1601), Dept. of Electronics and Communication Engineering, Vel Tech University, Avadi, Chennai",
 };
 
 const CHAPTERS = [
@@ -72,7 +72,7 @@ export default function Contact() {
             <div className="mt-4 flex items-start gap-3">
               <GraduationCap className="mt-0.5 shrink-0 text-white/40" size={16} />
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-white/35">Faculty Coordinator</p>
+                <p className="text-[10px] uppercase tracking-widest text-white/35">Faculty Coordinators</p>
                 <p className="text-sm text-white/80">{chapter.faculty.name}</p>
                 <p className="text-xs text-white/45">{chapter.faculty.title}</p>
               </div>

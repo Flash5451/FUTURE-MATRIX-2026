@@ -9,7 +9,7 @@ const STEPS = [
   { title: "Shortlisting", note: "Abstracts reviewed" },
   { title: "Confirmation", note: "Confirmation mail sent — 27 August 2026" },
   { title: "Hackathon Day", note: "24 hours, one prototype" },
-  { title: "Evaluation", note: "Judged on the working build" },
+  { title: "Evaluation", note: "Judged by the working model" },
   { title: "Winners Announced", note: "Awards & closing ceremony" },
 ];
 

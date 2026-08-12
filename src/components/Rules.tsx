@@ -11,7 +11,7 @@ const RULES = [
   { icon: Zap, title: "Power Provided", body: "Power supply is arranged at every table." },
   { icon: FileCheck, title: "Functional Outcome", body: "Hardware teams must demonstrate a functional prototype; software teams must demonstrate a working software solution." },
   { icon: ShieldAlert, title: "Original Work Only", body: "Plagiarism or pre-built solutions submitted as new work lead to disqualification." },
-  { icon: IndianRupee, title: "Selection Fee", body: "Shortlisted teams pay ₹200 per member (₹600 per team of 3) to confirm their slot after selection." },
+  { icon: IndianRupee, title: "Selection Fee", body: "Shortlisted teams pay ₹236 per member (₹708 per team of 3), inclusive of 18% GST, to confirm their slot after selection." },
 ];
 
 export default function Rules() {
