@@ -43,12 +43,22 @@ export default function Step3Problem({
   return (
     <div className="space-y-6">
       <div>
-        <span className="mb-1.5 block text-xs font-medium text-white/60">
-          Select a Problem Statement <span className="text-cyan">*</span>
-          <span className="ml-2 font-normal text-white/35">
-            {data.track || "Selected"} Track · Max {MAX_TEAMS_PER_PROBLEM} teams per problem statement
+        <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
+          <span className="block text-xs font-medium text-white/60">
+            Select a Problem Statement <span className="text-cyan">*</span>
+            <span className="ml-2 font-normal text-white/35">
+              {data.track || "Selected"} Track · Max {MAX_TEAMS_PER_PROBLEM} teams per problem statement
+            </span>
           </span>
-        </span>
+          <a
+            href="/#problems"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 text-xs font-medium text-cyan underline decoration-dotted hover:text-cyan/80"
+          >
+            Browse all problem statements ↗
+          </a>
+        </div>
 
         {loadError && <p className="mb-3 text-xs text-amber-400">{loadError}</p>}
 
@@ -80,6 +90,7 @@ export default function Step3Problem({
                     </span>
                   </div>
                   <p className="mt-1.5 font-display text-sm font-medium leading-tight">{p.title}</p>
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-white/45">{p.problem}</p>
                 </button>
               );
             })}

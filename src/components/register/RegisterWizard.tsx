@@ -181,6 +181,19 @@ export default function RegisterWizard() {
       <h1 className="mt-6 font-display text-2xl font-semibold sm:text-3xl">Team Registration</h1>
       <p className="mt-1 text-sm text-white/50">7 steps. Save a draft anytime, come back later.</p>
 
+      <a
+        href="/#problems"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 flex items-start gap-2.5 rounded-lg border border-cyan/25 bg-cyan/5 p-3.5 text-xs leading-5 text-cyan/90 transition-colors hover:border-cyan/50"
+      >
+        <span className="mt-0.5 shrink-0 font-mono">ⓘ</span>
+        <span>
+          <span className="font-semibold">Haven&apos;t seen the problem statements yet?</span>{" "}
+          Step 3 asks you to pick one — take a minute to review all of them first, so you know what you&apos;re signing up to build. Opens in a new tab.
+        </span>
+      </a>
+
       <div className="mt-8">
         <StepIndicator step={step} />
       </div>
