@@ -4,15 +4,16 @@ import { Check } from "lucide-react";
 import { STEP_LABELS } from "./formTypes";
 
 export default function StepIndicator({ step }: { step: number }) {
+  const total = STEP_LABELS.length;
   return (
     <div>
       {/* mobile */}
       <div className="flex items-center justify-between sm:hidden">
-        <span className="font-mono text-xs text-cyan">Step {step} / 7</span>
+        <span className="font-mono text-xs text-cyan">Step {step} / {total}</span>
         <span className="font-display text-sm font-medium">{STEP_LABELS[step - 1]}</span>
       </div>
       <div className="mt-2 h-1 w-full rounded-full bg-white/10 sm:hidden overflow-hidden">
-        <div className="h-1 rounded-full bg-gradient-to-r from-cyan to-amber transition-all duration-500 ease-out" style={{ width: `${(step / 7) * 100}%` }} />
+        <div className="h-1 rounded-full bg-gradient-to-r from-cyan to-amber transition-all duration-500 ease-out" style={{ width: `${(step / total) * 100}%` }} />
       </div>
 
       {/* desktop */}
@@ -32,7 +33,7 @@ export default function StepIndicator({ step }: { step: number }) {
                 >
                   {state === "done" ? <Check size={14} /> : n}
                 </div>
-                {n < 7 && (
+                {n < total && (
                   <div className={`mx-1 h-px flex-1 transition-colors duration-500 ${n < step ? "bg-cyan/50" : "bg-white/10"}`} />
                 )}
               </div>

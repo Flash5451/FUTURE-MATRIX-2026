@@ -42,23 +42,23 @@ export default function Step7Review({
         ["Team Leader", `${data.leaderName} (${data.leaderEmail})`],
         ["Team Members", `${data.members.length + 1} total (1 leader + ${data.members.length})`],
       ]} />
-      <ReviewGroup title="Project" step={2} onEdit={goToStep} rows={[
+      <ReviewGroup title="Project & Problem" step={2} onEdit={goToStep} rows={[
         ["Project Title", data.projectTitle],
-        ["Track", data.track],
         ["Domain", data.domain],
-        ["Abstract", data.abstract.slice(0, 60) + (data.abstract.length > 60 ? "…" : "")],
-        ["Expected Deliverables", data.deliverables.slice(0, 60) + (data.deliverables.length > 60 ? "…" : "")],
-      ]} />
-      <ReviewGroup title="Proposal" step={3} onEdit={goToStep} rows={[
+        ["Track", data.track],
         ["Problem Statement", selectedProblem ? `${selectedProblem.title} (${selectedProblem.id})` : "Not selected"],
         ["Problem Explanation", data.problem.slice(0, 60) + (data.problem.length > 60 ? "…" : "")],
+      ]} />
+      <ReviewGroup title="Abstract & Solution" step={3} onEdit={goToStep} rows={[
+        ["Abstract", data.abstract.slice(0, 60) + (data.abstract.length > 60 ? "…" : "")],
+        ["Expected Deliverables", data.deliverables.slice(0, 60) + (data.deliverables.length > 60 ? "…" : "")],
         ["Proposed Solution", data.solution.slice(0, 60) + (data.solution.length > 60 ? "…" : "")],
       ]} />
-      <ReviewGroup title="Technical" step={5} onEdit={goToStep} rows={[
+      <ReviewGroup title="Technical" step={4} onEdit={goToStep} rows={[
         ["Technologies", data.tech.slice(0, 60) + (data.tech.length > 60 ? "…" : "")],
         [data.track === "Hardware" ? "Hardware Components" : "Implementation", data.track === "Hardware" ? `${data.components.filter((c) => c.name.trim()).length} added` : "Software architecture / stack provided"],
       ]} />
-      <ReviewGroup title="Documents" step={6} onEdit={goToStep} rows={[
+      <ReviewGroup title="Documents" step={5} onEdit={goToStep} rows={[
         ["Abstract Link", data.abstractFileUrl ? "✓ Link added" : "Not added"],
         ["PPT Link", data.pptFileUrl ? "✓ Link added" : "Not added"],
       ]} />

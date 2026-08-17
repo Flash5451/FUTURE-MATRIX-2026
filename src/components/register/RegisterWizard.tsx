@@ -11,7 +11,6 @@ import {
 import StepIndicator from "./StepIndicator";
 import Step1Team from "./steps/Step1Team";
 import Step2Project from "./steps/Step2Project";
-import Step3Problem from "./steps/Step3Problem";
 import Step4Solution from "./steps/Step4Solution";
 import Step5Technical from "./steps/Step5Technical";
 import Step6Documents from "./steps/Step6Documents";
@@ -71,7 +70,7 @@ export default function RegisterWizard() {
 
   function goNext() {
     setDirection(1);
-    setStep((s) => Math.min(7, s + 1));
+    setStep((s) => Math.min(6, s + 1));
   }
 
   function goBack() {
@@ -86,7 +85,7 @@ export default function RegisterWizard() {
   }
 
   async function submit() {
-    if (!stepValid(7, data) || submitting) return;
+    if (!stepValid(6, data) || submitting) return;
     setSubmitting(true);
     setSubmitError("");
     try {
@@ -190,7 +189,7 @@ export default function RegisterWizard() {
         <span className="mt-0.5 shrink-0 font-mono">ⓘ</span>
         <span>
           <span className="font-semibold">Haven&apos;t seen the problem statements yet?</span>{" "}
-          Step 3 asks you to pick one — take a minute to review all of them first, so you know what you&apos;re signing up to build. Opens in a new tab.
+          Step 2 asks you to pick one — take a minute to review all of them first, so you know what you&apos;re signing up to build. Opens in a new tab.
         </span>
       </a>
 
@@ -215,17 +214,16 @@ export default function RegisterWizard() {
         >
           {step === 1 && <Step1Team data={data} set={set} />}
           {step === 2 && <Step2Project data={data} set={set} />}
-          {step === 3 && <Step3Problem data={data} set={set} />}
-          {step === 4 && <Step4Solution data={data} set={set} />}
-          {step === 5 && <Step5Technical data={data} set={set} />}
-          {step === 6 && <Step6Documents data={data} set={set} />}
-          {step === 7 && (
+          {step === 3 && <Step4Solution data={data} set={set} />}
+          {step === 4 && <Step5Technical data={data} set={set} />}
+          {step === 5 && <Step6Documents data={data} set={set} />}
+          {step === 6 && (
             <Step7Review data={data} set={set} goToStep={setStep} onSaveDraft={saveDraft} draftSaved={draftSaved} />
           )}
         </motion.div>
       </AnimatePresence>
 
-      {submitError && step === 7 && (
+      {submitError && step === 6 && (
         <div className="mt-6 rounded-lg border border-red-400/30 bg-red-400/5 px-4 py-3 text-sm text-red-300">
           {submitError}
         </div>
@@ -240,7 +238,7 @@ export default function RegisterWizard() {
           <ArrowLeft size={16} /> Back
         </button>
 
-        {step < 7 ? (
+        {step < 6 ? (
           <button
             onClick={() => canProceed && goNext()}
             disabled={!canProceed}

@@ -1,47 +1,121 @@
 "use client";
 
-import { Cpu, Code2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Lock } from "lucide-react";
 import { RegisterFormData, DOMAINS } from "../formTypes";
-import { Field, SelectField, Label } from "../FormFields";
+import { Field, SelectField, CounterField } from "../FormFields";
+import { PROBLEM_STATEMENTS, MAX_TEAMS_PER_PROBLEM, type Track, type ProblemStatement } from "@/lib/problemStatements";
 
-const TRACK_OPTIONS = [
-  { key: "Hardware" as const, icon: Cpu, blurb: "Physical prototype — embedded, IoT, robotics." },
-  { key: "Software" as const, icon: Code2, blurb: "Software solution — apps, AI/ML, platforms." },
-];
+type Availability = { id: string; filled: number; capacity: number; full: boolean };
+const FILTERS: ("All" | Track)[] = ["All", "Hardware", "Software"];
 
 export default function Step2Project({
   data, set,
 }: { data: RegisterFormData; set: (patch: Partial<RegisterFormData>) => void }) {
+  const [filter, setFilter] = useState<"All" | Track>("All");
+  const [availability, setAvailability] = useState<Record<string, Availability>>({});
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/problem-statements");
+        const json = await res.json();
+        if (cancelled) return;
+        if (json.success) {
+          const map: Record<string, Availability> = {};
+          for (const p of json.problemStatements as Availability[]) map[p.id] = p;
+          setAvailability(map);
+        } else {
+          setLoadError("Could not load live availability. Selection is re-checked on submit.");
+        }
+      } catch {
+        if (!cancelled) setLoadError("Could not load live availability. Selection is re-checked on submit.");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  const items = PROBLEM_STATEMENTS.filter((p) => filter === "All" || p.track === filter);
+
+  function selectProblem(p: ProblemStatement) {
+    set({ problemStatementId: p.id, track: p.track });
+  }
+
   return (
     <div className="space-y-5">
       <Field label="Project Title" required value={data.projectTitle}
         onChange={(e) => set({ projectTitle: e.target.value })} placeholder="Enter your project title" />
 
+      <SelectField label="Domain" required options={DOMAINS} value={data.domain}
+        onChange={(e) => set({ domain: e.target.value })} />
+
       <div>
-        <Label required>Track</Label>
-        <span className="mb-1.5 block text-xs font-normal text-white/35">Choose the track your project belongs to — this decides the problem statements shown next.</span>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {TRACK_OPTIONS.map(({ key, icon: Icon, blurb }) => {
-            const selected = data.track === key;
+        <span className="mb-1.5 block text-xs font-medium text-white/60">
+          Select a Problem Statement <span className="text-cyan">*</span>
+          <span className="ml-2 font-normal text-white/35">Max {MAX_TEAMS_PER_PROBLEM} teams per problem statement</span>
+        </span>
+
+        <div className="flex gap-2">
+          {FILTERS.map((f) => (
+            <button
+              key={f} type="button" onClick={() => setFilter(f)}
+              className={`rounded-full border px-4 py-1.5 text-xs transition-colors ${
+                filter === f ? "border-cyan bg-cyan/10 text-cyan" : "border-white/10 text-white/50 hover:border-white/25"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        {loadError && <p className="mt-3 text-xs text-amber-400">{loadError}</p>}
+
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {items.map((p) => {
+            const avail = availability[p.id];
+            const filled = avail?.filled ?? 0;
+            const full = avail?.full ?? false;
+            const selected = data.problemStatementId === p.id;
             return (
               <button
-                key={key} type="button"
-                onClick={() => set({ track: key, problemStatementId: "" })}
-                className={`tilt-card rounded-lg border p-4 text-left transition-colors ${
-                  selected ? "glow-border border-cyan bg-cyan/10" : "glass-panel hover:border-white/25"
+                key={p.id} type="button" disabled={full || loading}
+                onClick={() => selectProblem(p)}
+                className={`rounded-lg border p-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                  selected ? "border-cyan bg-cyan/10" : "border-white/10 bg-panel/40 hover:border-white/25"
                 }`}
               >
-                <Icon size={18} className={selected ? "text-cyan" : "text-white/60"} />
-                <p className="mt-2 font-display text-sm font-medium">{key}</p>
-                <p className="mt-0.5 text-xs text-white/40">{blurb}</p>
+                <div className="flex items-start justify-between gap-2">
+                  <span className="flex flex-wrap items-center gap-1.5">
+                    <span className="rounded-full border border-white/15 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/50">
+                      {p.track}
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-cyan/80">{p.sdg}</span>
+                  </span>
+                  <span className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[10px] ${
+                    full ? "border-red-400/40 text-red-400" : "border-white/15 text-white/50"
+                  }`}>
+                    {full ? (<><Lock size={10} /> FULL</>) : `${filled}/${MAX_TEAMS_PER_PROBLEM}`}
+                  </span>
+                </div>
+                <p className="mt-1.5 font-display text-sm font-medium leading-tight">{p.title}</p>
+                <p className="mt-1 line-clamp-2 text-xs leading-5 text-white/45">{p.problem}</p>
               </button>
             );
           })}
         </div>
       </div>
 
-      <SelectField label="Domain" required options={DOMAINS} value={data.domain}
-        onChange={(e) => set({ domain: e.target.value })} />
+      <CounterField
+        label="Explain the specific real-world problem your project addresses" required
+        mode="chars" max={1000} rows={6}
+        value={data.problem} onChange={(e) => set({ problem: e.target.value })}
+        placeholder="What is the problem? Who is affected? Why does it matter? What limitation exists in current approaches?"
+      />
     </div>
   );
 }
