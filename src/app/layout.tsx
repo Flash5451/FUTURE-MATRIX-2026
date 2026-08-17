@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Source_Serif_4, Inter } from "next/font/google";
-import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 
@@ -31,7 +30,6 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-bg text-white">
         <div className="grain-overlay" aria-hidden="true" />
-        <ScrollProgress />
         <BackToTop />
         {children}
       </body>
