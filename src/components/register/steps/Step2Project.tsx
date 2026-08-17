@@ -4,15 +4,13 @@ import { useEffect, useState } from "react";
 import { Lock } from "lucide-react";
 import { RegisterFormData, DOMAINS } from "../formTypes";
 import { Field, SelectField, CounterField } from "../FormFields";
-import { PROBLEM_STATEMENTS, MAX_TEAMS_PER_PROBLEM, type Track, type ProblemStatement } from "@/lib/problemStatements";
+import { PROBLEM_STATEMENTS, MAX_TEAMS_PER_PROBLEM, type ProblemStatement } from "@/lib/problemStatements";
 
 type Availability = { id: string; filled: number; capacity: number; full: boolean };
-const FILTERS: ("All" | Track)[] = ["All", "Hardware", "Software"];
 
 export default function Step2Project({
   data, set,
 }: { data: RegisterFormData; set: (patch: Partial<RegisterFormData>) => void }) {
-  const [filter, setFilter] = useState<"All" | Track>("All");
   const [availability, setAvailability] = useState<Record<string, Availability>>({});
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
@@ -40,8 +38,6 @@ export default function Step2Project({
     return () => { cancelled = true; };
   }, []);
 
-  const items = PROBLEM_STATEMENTS.filter((p) => filter === "All" || p.track === filter);
-
   function selectProblem(p: ProblemStatement) {
     set({ problemStatementId: p.id, track: p.track });
   }
@@ -60,23 +56,10 @@ export default function Step2Project({
           <span className="ml-2 font-normal text-white/35">Max {MAX_TEAMS_PER_PROBLEM} teams per problem statement</span>
         </span>
 
-        <div className="flex gap-2">
-          {FILTERS.map((f) => (
-            <button
-              key={f} type="button" onClick={() => setFilter(f)}
-              className={`rounded-full border px-4 py-1.5 text-xs transition-colors ${
-                filter === f ? "border-cyan bg-cyan/10 text-cyan" : "border-white/10 text-white/50 hover:border-white/25"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-
-        {loadError && <p className="mt-3 text-xs text-amber-400">{loadError}</p>}
+        {loadError && <p className="mt-2 text-xs text-amber-400">{loadError}</p>}
 
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
-          {items.map((p) => {
+          {PROBLEM_STATEMENTS.map((p) => {
             const avail = availability[p.id];
             const filled = avail?.filled ?? 0;
             const full = avail?.full ?? false;
@@ -85,17 +68,12 @@ export default function Step2Project({
               <button
                 key={p.id} type="button" disabled={full || loading}
                 onClick={() => selectProblem(p)}
-                className={`rounded-lg border p-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                className={`relative rounded-lg border p-3 pb-6 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
                   selected ? "border-cyan bg-cyan/10" : "border-white/10 bg-panel/40 hover:border-white/25"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <span className="flex flex-wrap items-center gap-1.5">
-                    <span className="rounded-full border border-white/15 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/50">
-                      {p.track}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-cyan/80">{p.sdg}</span>
-                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-cyan/80">{p.sdg}</span>
                   <span className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[10px] ${
                     full ? "border-red-400/40 text-red-400" : "border-white/15 text-white/50"
                   }`}>
@@ -104,6 +82,9 @@ export default function Step2Project({
                 </div>
                 <p className="mt-1.5 font-display text-sm font-medium leading-tight">{p.title}</p>
                 <p className="mt-1 line-clamp-2 text-xs leading-5 text-white/45">{p.problem}</p>
+                <span className="absolute bottom-2 right-2.5 font-mono text-[9px] uppercase tracking-wider text-white/35">
+                  {p.track}
+                </span>
               </button>
             );
           })}
