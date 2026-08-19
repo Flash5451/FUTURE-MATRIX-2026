@@ -19,10 +19,8 @@ export type ValidatedRegistration = {
   projectTitle: string;
   track: "Hardware" | "Software";
   domain: string;
-  abstract: string;
   deliverables: string;
   problem: string;
-  solution: string;
   tech: string;
   components: ValidatedComponent[];
   problemStatementId: string;
@@ -60,10 +58,8 @@ const REQUIRED_STRING_FIELDS: [string, string][] = [
   ["leaderYear", "Leader year of study"],
   ["projectTitle", "Project title"],
   ["domain", "Domain"],
-  ["abstract", "Project abstract"],
   ["deliverables", "Expected deliverables"],
   ["problem", "Problem explanation"],
-  ["solution", "Proposed solution"],
   ["tech", "Technology stack"],
   ["problemStatementId", "Problem statement selection"],
 ];
@@ -148,10 +144,8 @@ export function validateRegistrationPayload(input: unknown): ValidationResult {
       projectTitle: (d.projectTitle as string).trim(),
       track: d.track,
       domain: (d.domain as string).trim(),
-      abstract: (d.abstract as string).trim(),
       deliverables: (d.deliverables as string).trim(),
       problem: (d.problem as string).trim(),
-      solution: (d.solution as string).trim(),
       tech: (d.tech as string).trim(),
       components: d.track === "Hardware" ? filledComponents : [],
       problemStatementId: (d.problemStatementId as string).trim(),

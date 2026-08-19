@@ -97,6 +97,12 @@ export default function Step2Project({
         value={data.problem} onChange={(e) => set({ problem: e.target.value })}
         placeholder="What is the problem? Who is affected? Why does it matter? What limitation exists in current approaches?"
       />
+
+      <CounterField
+        label="Expected Deliverables" required mode="chars" max={750} rows={4}
+        value={data.deliverables} onChange={(e) => set({ deliverables: e.target.value })}
+        placeholder="What will your team develop and demonstrate by the end of the hackathon?"
+      />
     </div>
   );
 }

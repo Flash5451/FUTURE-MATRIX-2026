@@ -79,8 +79,6 @@ export async function POST(req: NextRequest) {
       data.members[1].mobile,
       data.leaderDept,
       data.leaderYear,
-      data.abstract,
-      data.solution,
       data.tech,
       data.deliverables,
       formatHardwareComponents(data),

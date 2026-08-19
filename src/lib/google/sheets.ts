@@ -19,7 +19,7 @@ export const HEADERS = [
   "Member 2 Name", "Member 2 Email", "Member 2 Phone",
   "Member 3 Name", "Member 3 Email", "Member 3 Phone",
   "Department", "Year",
-  "Abstract", "Proposed Solution", "Technology Stack", "Expected Deliverables",
+  "Technology Stack", "Expected Deliverables",
   "Hardware Components", "Abstract File Link", "PPT File Link", "Registration Status",
 ] as const;
 

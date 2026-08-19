@@ -11,7 +11,6 @@ import {
 import StepIndicator from "./StepIndicator";
 import Step1Team from "./steps/Step1Team";
 import Step2Project from "./steps/Step2Project";
-import Step4Solution from "./steps/Step4Solution";
 import Step5Technical from "./steps/Step5Technical";
 import Step6Documents from "./steps/Step6Documents";
 import Step7Review from "./steps/Step7Review";
@@ -70,7 +69,7 @@ export default function RegisterWizard() {
 
   function goNext() {
     setDirection(1);
-    setStep((s) => Math.min(6, s + 1));
+    setStep((s) => Math.min(5, s + 1));
   }
 
   function goBack() {
@@ -214,16 +213,15 @@ export default function RegisterWizard() {
         >
           {step === 1 && <Step1Team data={data} set={set} />}
           {step === 2 && <Step2Project data={data} set={set} />}
-          {step === 3 && <Step4Solution data={data} set={set} />}
-          {step === 4 && <Step5Technical data={data} set={set} />}
-          {step === 5 && <Step6Documents data={data} set={set} />}
-          {step === 6 && (
+          {step === 3 && <Step5Technical data={data} set={set} />}
+          {step === 4 && <Step6Documents data={data} set={set} />}
+          {step === 5 && (
             <Step7Review data={data} set={set} goToStep={setStep} onSaveDraft={saveDraft} draftSaved={draftSaved} />
           )}
         </motion.div>
       </AnimatePresence>
 
-      {submitError && step === 6 && (
+      {submitError && step === 5 && (
         <div className="mt-6 rounded-lg border border-red-400/30 bg-red-400/5 px-4 py-3 text-sm text-red-300">
           {submitError}
         </div>
@@ -238,7 +236,7 @@ export default function RegisterWizard() {
           <ArrowLeft size={16} /> Back
         </button>
 
-        {step < 6 ? (
+        {step < 5 ? (
           <button
             onClick={() => canProceed && goNext()}
             disabled={!canProceed}

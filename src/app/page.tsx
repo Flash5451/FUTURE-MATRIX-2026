@@ -23,9 +23,9 @@ export default function Home() {
         <Hero />
         <TraceDivider />
         <StatsStrip />
+        <ProblemStatements />
         <About />
         <WhyHardware />
-        <ProblemStatements />
         <Timeline />
         <Rules />
         <Schedule />
