@@ -24,6 +24,15 @@ function formatHardwareComponents(data: ValidatedRegistration): string {
     .join("; ");
 }
 
+// Google Sheets is written with valueInputOption=USER_ENTERED, which auto-parses
+// cell content the way typing it into the UI would. Phone numbers (and anything
+// number-like) can silently turn into a numeric cell — dropping formatting,
+// sometimes rendering in scientific notation depending on column width/format.
+// A leading apostrophe forces Sheets to store the value as literal text.
+function asText(value: string): string {
+  return value ? `'${value}` : value;
+}
+
 export async function POST(req: NextRequest) {
   try {
     let parsedJson: unknown;
@@ -70,13 +79,13 @@ export async function POST(req: NextRequest) {
       data.projectTitle,
       data.leaderName,
       data.leaderEmail,
-      data.leaderMobile,
+      asText(data.leaderMobile),
       data.members[0].name,
       data.members[0].email,
-      data.members[0].mobile,
+      asText(data.members[0].mobile),
       data.members[1].name,
       data.members[1].email,
-      data.members[1].mobile,
+      asText(data.members[1].mobile),
       data.leaderDept,
       data.leaderYear,
       data.tech,
