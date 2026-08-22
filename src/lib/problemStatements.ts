@@ -77,6 +77,18 @@ export const PROBLEM_STATEMENTS: ProblemStatement[] = [
     title: "Portable Emergency Mesh Communication Device",
     problem: "Develop a Portable Emergency Mesh Communication Device that establishes a self-healing wireless mesh network to provide voice and text communication when conventional cellular or internet infrastructure becomes unavailable.",
   },
+  {
+    id: "HW-11", track: "Hardware", chapter: "IEEE ComSoc",
+    sdg: "SDG 9 – Industry, Innovation & Infrastructure",
+    title: "Communication-System-on-Chip Applications",
+    problem: "Design and prototype a Communication-System-on-Chip (SoC) application that integrates signal processing, wireless transmission, and embedded control on a single low-power platform for a real-world communication use case.",
+  },
+  {
+    id: "HW-12", track: "Hardware", chapter: "IEEE SSIT",
+    sdg: "SDG 16 – Peace, Justice & Strong Institutions",
+    title: "Wi-Fi Deauthentication Attack Detector & Alert System",
+    problem: "Build a Wi-Fi Deauthentication Attack Detector that continuously monitors nearby wireless traffic for deauthentication/disassociation frame floods and raises an immediate physical or networked alert when an attack is detected.",
+  },
 
   // Software Track
   {
@@ -138,6 +150,30 @@ export const PROBLEM_STATEMENTS: ProblemStatement[] = [
     sdg: "SDG 13 – Climate Action",
     title: "Disaster Communication Coordination Platform",
     problem: "Create a Disaster Communication Coordination Platform that intelligently prioritizes emergency messages, allocates communication resources, maps affected regions, and enables coordination among response teams during natural disasters.",
+  },
+  {
+    id: "SW-11", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 16 – Peace, Justice & Strong Institutions",
+    title: "Real-Time Phishing URL & Email Detector",
+    problem: "Build a Real-Time Phishing URL and Email Detector that analyzes links and message content as they arrive, flags suspicious sender patterns and lookalike domains, and warns the user before they can be compromised.",
+  },
+  {
+    id: "SW-12", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 16 – Peace, Justice & Strong Institutions",
+    title: "Network Intrusion Detection System using Machine Learning",
+    problem: "Develop a Network Intrusion Detection System that uses machine learning to classify live network traffic, identify anomalous or malicious behavior in real time, and alert administrators before damage spreads.",
+  },
+  {
+    id: "SW-13", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 16 – Peace, Justice & Strong Institutions",
+    title: "Secure File Vault with End-to-End Encryption",
+    problem: "Design a Secure File Vault application that encrypts files end-to-end before they ever leave the device, giving users a private, tamper-proof space to store and share sensitive documents.",
+  },
+  {
+    id: "SW-14", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 16 – Peace, Justice & Strong Institutions",
+    title: "Password Strength Analyzer & Breach Checker",
+    problem: "Create a Password Strength Analyzer and Breach Checker that scores password quality in real time and cross-checks it against known breach databases, helping users fix weak or already-compromised credentials before they're exploited.",
   },
 ];
 

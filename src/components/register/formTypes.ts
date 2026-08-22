@@ -45,7 +45,7 @@ export type RegisterFormData = {
 
 export const DOMAINS = [
   "Healthcare", "Agriculture", "Smart Cities", "Environment", "Energy",
-  "Robotics", "Disaster Management", "Assistive Technology", "Open Innovation",
+  "Robotics", "Disaster Management", "Assistive Technology", "Cybersecurity", "Open Innovation",
 ];
 
 export const YEARS = ["1st Year", "2nd Year", "3rd Year", "Final Year"];
