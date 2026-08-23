@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
@@ -21,17 +20,14 @@ export default function Judges() {
         >
           <div className="holo-ring mx-auto flex h-28 w-28 items-center justify-center rounded-full p-1">
             <div className="h-full w-full overflow-hidden rounded-full border-2 border-bg">
-              <Image src={GUEST.photo} alt={GUEST.name} width={112} height={112} className="h-full w-full object-cover" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={GUEST.photo} alt={GUEST.name} width={112} height={112} className="h-full w-full object-cover" />
             </div>
           </div>
           <p className="mt-5 font-display text-xl font-semibold text-white">{GUEST.name}</p>
           <p className="mt-1 text-sm text-cyan">{GUEST.role}</p>
         </motion.div>
       </div>
-
-      <p className="mt-8 text-center text-sm text-white/40">
-        More judges and mentors will be posted here as they&apos;re confirmed.
-      </p>
     </section>
   );
 }
