@@ -7,7 +7,7 @@ const STEPS = [
   { title: "Registration Opens", note: "Team formation begins" },
   { title: "Registration Closes", note: "Final headcount locked — 24 August 2026" },
   { title: "Shortlisting", note: "Abstracts reviewed" },
-  { title: "Confirmation", note: "Confirmation mail sent — 27 August 2026" },
+  { title: "Confirmation", note: "Shortlisted results & confirmation mail sent — 28 August 2026" },
   { title: "Hackathon Day", note: "24 hours, one prototype" },
   { title: "Evaluation", note: "Judged by the working model" },
   { title: "Winners Announced", note: "Awards & closing ceremony" },

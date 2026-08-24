@@ -152,6 +152,7 @@ body {
 
 /* static medallion ring (no spin) */
 .holo-ring {
+  position: relative;
   background: var(--cyan);
   animation: none;
 }
