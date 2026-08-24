@@ -1,37 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { Users } from "lucide-react";
-
-type TrackStatus = { registered: number };
-type Status = Record<"Hardware" | "Software", TrackStatus>;
+import { Lock } from "lucide-react";
 
 export default function RegistrationCapBanner() {
-  const [tracks, setTracks] = useState<Status | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/registration-status");
-        const json = await res.json();
-        if (!cancelled && json.success) setTracks(json.tracks);
-      } catch {
-        // Silently omit the banner if the status can't be loaded — non-critical.
-      }
-    })();
-    return () => { cancelled = true; };
-  }, []);
-
-  if (!tracks) return null;
-
   return (
-    <span className="glow-border inline-flex flex-wrap items-center gap-x-4 gap-y-1 rounded-md border border-cyan/30 bg-cyan/5 px-4 py-1.5 font-mono text-xs text-cyan">
-      <Users size={13} />
-      <span>Hardware: {tracks.Hardware.registered} teams registered</span>
-      <span className="text-white/20">·</span>
-      <span>Software: {tracks.Software.registered} teams registered</span>
-      <span className="text-white/40">— registration is open</span>
+    <span className="glow-border inline-flex flex-wrap items-center gap-2 rounded-md border border-amber-400/30 bg-amber-400/5 px-4 py-1.5 font-mono text-xs text-amber-200">
+      <Lock size={13} />
+      <span>Registration Closed</span>
+      <span className="text-white/30">— entries are no longer being accepted</span>
     </span>
   );
 }

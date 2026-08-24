@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
@@ -84,12 +83,9 @@ export default function Navbar() {
           })}
         </ul>
 
-        <Link
-          href="/register"
-          className="magnetic-btn glow-border hidden lg:inline-flex items-center rounded-full border border-cyan/40 bg-cyan/5 px-5 py-2 text-sm font-medium text-cyan transition-colors hover:bg-cyan hover:text-bg"
-        >
-          Register
-        </Link>
+        <span className="hidden lg:inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/5 px-5 py-2 text-sm font-medium text-amber-300">
+          Registration Closed
+        </span>
 
         <button
           aria-label={open ? "Close menu" : "Open menu"}
@@ -107,13 +103,9 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <Link
-            href="/register"
-            onClick={() => setOpen(false)}
-            className="text-cyan border border-cyan/40 rounded-full px-4 py-2 text-center"
-          >
-            Register
-          </Link>
+          <span className="text-amber-300 border border-amber-400/40 rounded-full px-4 py-2 text-center">
+            Registration Closed
+          </span>
         </div>
       )}
     </header>

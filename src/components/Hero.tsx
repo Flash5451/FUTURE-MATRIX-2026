@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowDown, FileDown } from "lucide-react";
 import Countdown from "./Countdown";
@@ -91,12 +90,12 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.85 }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <Link
-            href="/register"
-            className="magnetic-btn glow-border rounded-full bg-cyan px-7 py-3 text-sm font-semibold text-bg"
+          <span
+            aria-label="Registration closed"
+            className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-7 py-3 text-sm font-semibold text-amber-200"
           >
-            Register Now
-          </Link>
+            Registration Closed
+          </span>
           <a
             href="/future-matrix-rulebook.pdf"
             className="magnetic-btn inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3 text-sm font-medium text-white/80 transition-colors hover:border-cyan/50 hover:text-cyan"
