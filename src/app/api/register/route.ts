@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findProblemStatement, MAX_TEAMS_PER_PROBLEM } from "@/lib/problemStatements";
 import { validateRegistrationPayload, type ValidatedRegistration } from "@/lib/registration/validate";
+import { isRegistrationOpen } from "@/lib/registration/status";
 import {
   appendRegistrationRow,
   countForProblemStatement,
@@ -35,6 +36,10 @@ function asText(value: string): string {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isRegistrationOpen()) {
+      return fail("Registration is closed.", 403);
+    }
+
     let parsedJson: unknown;
     try {
       parsedJson = await req.json();
