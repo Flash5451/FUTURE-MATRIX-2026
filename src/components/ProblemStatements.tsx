@@ -16,7 +16,7 @@ const ICONS: Record<string, LucideIcon> = {
   "HW-09": Wind, "HW-10": Radio,
   "SW-01": HeartPulse, "SW-02": GraduationCap, "SW-03": Building2, "SW-04": Accessibility,
   "SW-05": Recycle, "SW-06": Bell, "SW-07": TrafficCone, "SW-08": Wifi,
-  "SW-09": Cloud, "SW-10": Radio,
+  "SW-09": Cloud, "SW-10": Radio, "SW-15": Radio, "SW-16": Wifi, "SW-17": Gauge,
 };
 
 export default function ProblemStatements() {

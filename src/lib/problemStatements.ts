@@ -175,6 +175,24 @@ export const PROBLEM_STATEMENTS: ProblemStatement[] = [
     title: "Password Strength Analyzer & Breach Checker",
     problem: "Create a Password Strength Analyzer and Breach Checker that scores password quality in real time and cross-checks it against known breach databases, helping users fix weak or already-compromised credentials before they're exploited.",
   },
+  {
+    id: "SW-15", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 9 – Industry, Innovation & Infrastructure",
+    title: "Communication-System-on-Chip Applications",
+    problem: "Develop a software-driven Communication-System-on-Chip application that models, configures, and evaluates integrated communication processing blocks for a practical wireless or signal-processing use case, with emphasis on efficient data flow, low latency, and reliable system operation.",
+  },
+  {
+    id: "SW-16", track: "Software", chapter: "IEEE ComSoc",
+    sdg: "SDG 9 – Industry, Innovation & Infrastructure",
+    title: "Wireless Communication RF Front-End",
+    problem: "Design and simulate a software-assisted wireless communication RF front-end that analyzes and optimizes key receiver or transmitter stages such as filtering, gain control, frequency conversion, and signal conditioning for improved communication performance.",
+  },
+  {
+    id: "SW-17", track: "Software", chapter: "IEEE SSIT",
+    sdg: "SDG 9 – Industry, Innovation & Infrastructure",
+    title: "AI-Driven PPA Optimization using OpenROAD",
+    problem: "Build an AI-driven optimization workflow using the OpenROAD toolchain to explore digital design implementations and automatically improve Power, Performance, and Area (PPA) through intelligent parameter selection, iterative evaluation, and design-space exploration.",
+  },
 ];
 
 export function findProblemStatement(id: string): ProblemStatement | undefined {
